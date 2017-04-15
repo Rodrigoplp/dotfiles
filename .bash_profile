@@ -14,6 +14,7 @@ alias joinpdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Res
 alias hour='say `date "+%H:%M"`'											# say local time
 alias up1='cd ..;lsdir'													# up one dir
 alias wwatch='webpack --progress --colors --watch'									# Start Webpack Watch
+alias gitwho='git ls-tree -r master --name-only'									# List all files tracked by Git on current repository
 
 function up {
     cd `expr "$PWD" : "^\(.*$1[^/]*\)"`
