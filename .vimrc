@@ -142,9 +142,9 @@ highlight EndOfBuffer ctermfg=green
 " Spell check
 set spell
 highlight clear SpellBad
-highlight SpellBad cterm=underline ctermfg=magenta
+highlight SpellBad cterm=underline ctermfg=yellow
 highlight SpellCap cterm=underline ctermfg=81 ctermbg=NONE
-highlight Comment ctermfg=black
+highlight Comment ctermfg=yellow
 highlight Statement ctermfg=white
 
 " Yank to clipboard
@@ -154,9 +154,6 @@ set clipboard=unnamed
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
-" Fix tab spacing
-"filetype plugin indent on
-" show existing tab with 4 spaces width
 set tabstop=4
 
 "------------------------------------------------------------
