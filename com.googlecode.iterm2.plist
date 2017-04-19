@@ -1266,11 +1266,11 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSColorPanelMode</key>
-	<string>7</string>
+	<string>3</string>
 	<key>NSColorPickerPreferredRGBEntryMode</key>
 	<integer>2</integer>
 	<key>NSColorPickerSlidersDefaults</key>
-	<string>1</string>
+	<string>3</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -1316,15 +1316,15 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>685 474 228 297 0 0 2560 1440 </string>
+	<string>685 438 228 297 0 0 2560 1440 </string>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>2049 110 445 551 0 0 2560 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>970 787 620 392 0 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1322 821 796 473 0 0 2560 1440 </string>
+	<string>1322 847 796 473 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1 1042 906 396 0 0 2560 1440 </string>
+	<string>1 6 1277 1432 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1281 722 1277 718 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -2256,13 +2256,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.80000001190000003</real>
+				<real>1</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.80000001190000003</real>
+				<real>0.83772786458333337</real>
 				<key>Red Component</key>
-				<real>0.80000001190000003</real>
+				<real>0.67545572916666674</real>
 			</dict>
 			<key>Guid</key>
 			<string>C4419E37-DA2D-473C-BBA8-7680353A8862</string>
@@ -2657,6 +2657,10 @@
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
+	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
+	<integer>1</integer>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
