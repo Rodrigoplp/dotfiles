@@ -14,6 +14,7 @@ Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'enricobacis/vim-airline-clock'
 " Plugin 'pangloss/vim-javascript'
 " Plugin 'mxw/vim-jsx'
 
@@ -84,7 +85,7 @@ set mouse=a
 set cmdheight=1
 set laststatus=2
  
-" airline
+" Airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 set t_Co=256
@@ -93,7 +94,7 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-" unicode symbols
+" Unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
@@ -108,7 +109,7 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_symbols.space = "\ua0"
 
-" airline symbols
+" Airline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
@@ -116,6 +117,17 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+
+"Airline sections
+function! AirlineInit()
+	let g:airline_section_a = airline#section#create(['mode'])
+	let g:airline_section_x = airline#section#create(['%P'])
+	let g:airline_section_y = airline#section#create(['%B'])
+	let g:airline_section_z = airline#section#create_right(['%l','%c'])
+	let g:airline_section_error = airline#section#create([])
+	let g:airline_section_warning = airline#section#create([])
+endfunction
+autocmd VimEnter * call AirlineInit()
 
 " Display line numbers on the left
 set number
@@ -148,8 +160,12 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_winsize = 15
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
+
+" Set space as character in split separator
+set fillchars+=vert:\ 
+highlight VertSplit ctermfg=black
 
 "------------------------------------------------------------
 " Mappings
