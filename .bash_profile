@@ -9,7 +9,7 @@ export PS1='\[\e[0;34m\]\u\[\e[0m\]@\[\e[0;34m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0
 # Aliases
 alias lsdir='ls -ld -- */'																																	# List folders
 alias changelog='github-changes -o reol -r edge_ios -a --title "Leadkit iOS CHANGELOG"'			# REOL build
-alias jira='/Users/rpinto/Documents/Development/Shell\ scripts/jira.sh'											# runs jira.sh
+alias jira='cd /Users/rodrigopinto/Documents/Office/REOL\ Services/tmp'											# runs jira.sh
 alias folder='find . -type f -exec ls -l {} \; | awk '\''{sum += $5} END {print sum}'\'''		# folder size
 alias home="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/KidsOnTube_site"	# go to iPhone folder
 alias joinpdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py --output all.pdf *.pdf"	# join PDFs into one file

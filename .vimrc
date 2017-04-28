@@ -15,6 +15,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'enricobacis/vim-airline-clock'
+Plugin 'tmhedberg/SimpylFold'
 " Plugin 'pangloss/vim-javascript'
 " Plugin 'mxw/vim-jsx'
 
@@ -166,15 +167,48 @@ set shiftwidth=2
 " Set space as character in split separator
 set fillchars+=vert:\ 
 highlight VertSplit ctermfg=black
+set splitbelow
+set splitright
+
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Language dependent configurations
+
+" Python
+autocmd BufNewFile,BufRead *.py set tabstop=4
+autocmd BufNewFile,BufRead *.py set softtabstop=4
+autocmd BufNewFile,BufRead *.py set shiftwidth=4
+autocmd BufNewFile,BufRead *.py set textwidth=139
+autocmd BufNewFile,BufRead *.py set expandtab
+autocmd BufNewFile,BufRead *.py set autoindent
+autocmd BufNewFile,BufRead *.py set fileformat=unix
+
+" Javascript, HTML and CSS
+autocmd BufNewFile,BufRead *.js, *.html, *.css set tabstop=2
+autocmd BufNewFile,BufRead *.js, *.html, *.css set softtabstop=2
+autocmd BufNewFile,BufRead *.js, *.html, *.css set shiftwidth=2
 
 "------------------------------------------------------------
 " Mappings
 "
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
-map Y y$
+nmap Y y$
  
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
+
 nmap - :Explore<Enter>
+nmap < <C-B>
+nmap > <C-F>
+nnoremap <space> za
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
