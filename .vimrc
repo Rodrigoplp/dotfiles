@@ -170,7 +170,6 @@ highlight VertSplit ctermfg=black
 set splitbelow
 set splitright
 
-
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
@@ -187,9 +186,17 @@ autocmd BufNewFile,BufRead *.py set autoindent
 autocmd BufNewFile,BufRead *.py set fileformat=unix
 
 " Javascript, HTML and CSS
-autocmd BufNewFile,BufRead *.js, *.html, *.css set tabstop=2
-autocmd BufNewFile,BufRead *.js, *.html, *.css set softtabstop=2
-autocmd BufNewFile,BufRead *.js, *.html, *.css set shiftwidth=2
+autocmd BufNewFile,BufRead *.js set tabstop=2
+autocmd BufNewFile,BufRead *.js set softtabstop=2
+autocmd BufNewFile,BufRead *.js set shiftwidth=2
+
+autocmd BufNewFile,BufRead *.html set tabstop=2
+autocmd BufNewFile,BufRead *.html set softtabstop=2
+autocmd BufNewFile,BufRead *.html set shiftwidth=2
+
+autocmd BufNewFile,BufRead *.css set tabstop=2
+autocmd BufNewFile,BufRead *.css set softtabstop=2
+autocmd BufNewFile,BufRead *.css set shiftwidth=2
 
 "------------------------------------------------------------
 " Mappings
