@@ -119,7 +119,7 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-"Airline sections
+" Airline sections
 function! AirlineInit()
 	let g:airline_section_a = airline#section#create(['mode'])
 	let g:airline_section_x = airline#section#create(['%P'])
@@ -129,6 +129,9 @@ function! AirlineInit()
 	let g:airline_section_warning = airline#section#create([])
 endfunction
 autocmd VimEnter * call AirlineInit()
+
+" Airline clock settings
+let g:airline#extensions#clock#format = '%b %d, %H:%M'
 
 " Display line numbers on the left
 set number
