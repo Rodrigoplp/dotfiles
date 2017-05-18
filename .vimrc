@@ -88,7 +88,7 @@ set laststatus=2
  
 " Airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
+let g:airline_theme='monochrome'
 set t_Co=256
 
 if !exists('g:airline_symbols')
