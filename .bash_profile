@@ -17,6 +17,7 @@ alias hour='say `date "+%H:%M"`'																														# say local time
 alias up1='cd ..;lsdir'																																			# up one dir
 alias wwatch='webpack --progress --colors --watch'																					# Start Webpack Watch
 alias gitwho='git ls-tree -r master --name-only'																						# List files tracked by Git 
+alias mem='top -l 1 | grep -E "^CPU|^Phys"'																									# system memory usage
 
 function up {
     cd `expr "$PWD" : "^\(.*$1[^/]*\)"`
