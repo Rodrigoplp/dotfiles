@@ -65,7 +65,7 @@ set autoindent
 " Stop certain movements from always going to the first character of a line.
 " While this behaviour deviates from that of Vi, it does what most users
 " coming from other editors would expect.
-set nostartofline
+"set nostartofline
  
 " Display the cursor position on the last line of the screen or in the status
 " line of a window
@@ -201,6 +201,9 @@ autocmd BufNewFile,BufRead *.css set tabstop=2
 autocmd BufNewFile,BufRead *.css set softtabstop=2
 autocmd BufNewFile,BufRead *.css set shiftwidth=2
 
+" JSON
+com! Json %!python -m json.tool
+
 "------------------------------------------------------------
 " Mappings
 "
@@ -216,6 +219,11 @@ nmap - :Explore<Enter>
 nmap < <C-B>
 nmap > <C-F>
 nnoremap <space> za
+nmap =j :%!python -m json.tool<CR>
+
+" Deleting does not replace clipboard
+nnoremap d "_d
+vnoremap d "_d
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
