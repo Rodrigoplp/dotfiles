@@ -148,17 +148,6 @@ set relativenumber
 " Trying to hide tildes
 highlight EndOfBuffer ctermfg=green
 
-" Ranger
-function RangerExplorer()
-    exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-    if filereadable('/tmp/vim_ranger_current_file')
-        exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-        call system('rm /tmp/vim_ranger_current_file')
-    endif
-    redraw!
-endfun
-map \f :call RangerExplorer()<CR>
-
 " Spell check
 set spell
 highlight clear SpellBad
@@ -231,6 +220,7 @@ nmap < <C-B>
 nmap > <C-F>
 nnoremap <space> za
 nmap =j :%!python -m json.tool<CR>
+nmap \f :!ranger<CR>
 
 " Deleting does not replace clipboard
 nnoremap d "_d
