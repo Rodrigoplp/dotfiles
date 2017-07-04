@@ -8,6 +8,7 @@ export PS1='\[\e[0;34m\]\u\[\e[0m\]@\[\e[0;34m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0
 
 # Aliases
 alias lsdir='ls -ld -- */'																																			# List folders
+alias lsall='ls -ldfh -- */ && ls -lafh | grep -v "^d"'																					# List folders and files separetly
 alias changelog='github-changes -o reol -r edge_ios -a --title "Leadkit iOS CHANGELOG"'					# REOL build
 alias jira='cd /Users/rodrigopinto/Documents/Office/REOL\ Services/tmp'													# runs jira.sh
 alias folder='find . -type f -exec ls -l {} \; | awk '\''{sum += $5} END {print sum}'\'''				# folder size

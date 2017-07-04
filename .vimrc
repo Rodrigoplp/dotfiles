@@ -225,6 +225,8 @@ nmap \f :!ranger<CR>
 " Deleting does not replace clipboard
 nnoremap d "_d
 vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
