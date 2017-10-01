@@ -16,6 +16,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'enricobacis/vim-airline-clock'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'vimwiki/vimwiki'
 " Plugin 'pangloss/vim-javascript'
 " Plugin 'mxw/vim-jsx'
 
@@ -31,9 +32,7 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-set nocompatible
 filetype indent plugin on
-syntax on
 set hidden
  
 " Better command-line completion
@@ -85,7 +84,16 @@ set mouse=a
 " 'press <Enter> to continue'
 set cmdheight=1
 set laststatus=2
+
+" Vimwiki (https://github.com/vimwiki/vimwiki)
+set nocompatible
+filetype plugin on
+syntax on
+let g:vimwiki_list = [{'syntax': 'markdown', 'ext': '.md'}]
  
+" Vim-instant-markdown (https://github.com/suan/vim-instant-markdown)
+let g:instant_markdown_autostart = 0
+
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='monochrome'
@@ -170,12 +178,29 @@ set shiftwidth=2
 " Set space as character in split separator
 set fillchars+=vert:\ 
 highlight VertSplit ctermfg=black
+highlight Folded ctermfg=12
 set splitbelow
 set splitright
 
 " Enable folding
-set foldmethod=indent
-set foldlevel=99
+set foldmethod=manual
+set foldcolumn=1
+highlight Folded ctermbg=NONE
+highlight FoldColumn ctermbg=NONE
+let g:markdown_folding = 1
+let g:markdown_enable_folding = 1
+
+function MarkdownLevel() 
+	let h = matchstr(getline(v:lnum), '^#\+') 
+	if empty(h) 
+		return "=" 
+	else 
+		return ">" . len(h) 
+	endif 
+endfunction
+au BufEnter *.md setlocal foldexpr=MarkdownLevel()
+au BufEnter *.md setlocal foldmethod=expr
+
 
 " Language dependent configurations
 
@@ -204,6 +229,11 @@ autocmd BufNewFile,BufRead *.css set shiftwidth=2
 " JSON
 com! Json %!python -m json.tool
 
+" XML
+autocmd BufNewFile,BufRead *.xml set tabstop=2
+autocmd BufNewFile,BufRead *.xml set softtabstop=2
+autocmd BufNewFile,BufRead *.xml set shiftwidth=2
+
 "------------------------------------------------------------
 " Mappings
 "
@@ -221,6 +251,7 @@ nmap > <C-F>
 nnoremap <space> za
 nmap =j :%!python -m json.tool<CR>
 nmap \f :!ranger<CR>
+map <leader>md :InstantMarkdownPreview<CR>
 
 " Deleting does not replace clipboard
 nnoremap d "_d
