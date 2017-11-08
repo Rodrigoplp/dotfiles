@@ -139,7 +139,7 @@ endfunction
 autocmd VimEnter * call AirlineInit()
 
 " Airline clock settings
-let g:airline#extensions#clock#format = '%b %d, %H:%M'
+let g:airline#extensions#clock#format = '%a, %b %d, %H:%M'
 
 " Display line numbers on the left
 set number
@@ -156,11 +156,14 @@ set relativenumber
 " Trying to hide tildes
 highlight EndOfBuffer ctermfg=green
 
+" Limit characters of line in Markdown files
+highlight ColorColumn ctermbg=black
+au BufRead,BufNewFile *.md setlocal colorcolumn=80
+
 " Spell check
 set spell
 highlight clear SpellBad
-highlight SpellBad cterm=underline ctermfg=yellow
-highlight SpellCap cterm=underline ctermfg=81 ctermbg=NONE
+highlight SpellCap cterm=underline ctermbg=NONE
 highlight Comment ctermfg=yellow
 highlight Statement ctermfg=white
 
@@ -201,6 +204,23 @@ endfunction
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()
 au BufEnter *.md setlocal foldmethod=expr
 
+" Folding in txt files
+function! NeatFoldText()
+	setlocal foldmethod=expr
+	setlocal foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
+	set foldtext=getline(v:foldstart)
+  
+"	let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+"  let lines_count = v:foldend - v:foldstart + 1
+"  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+"  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+"  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+"  let foldtextend = lines_count_text . repeat(foldchar, 8)
+"  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+"  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+autocmd BufNewFile,BufRead *.txt set foldmethod=indent
+autocmd BufNewFile,BufRead *.txt set foldtext=NeatFoldText()
 
 " Language dependent configurations
 
