@@ -39647,13 +39647,13 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 139 606 456 0 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>706 1015 918 381 0 0 2560 1440 </string>
+	<string>706 1002 918 394 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1708 4 850 424 0 0 2560 1440 </string>
+	<string>1653 1 906 396 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1281 28 1277 1412 0 0 2560 1440 </string>
+	<string>1281 722 1277 718 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>1 1044 906 396 0 0 2560 1440 </string>
+	<string>1281 4 1277 1436 0 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -40255,6 +40255,8 @@
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
+			<true/>
+			<key>ASCII Ligatures</key>
 			<true/>
 			<key>AWDS Pane Directory</key>
 			<string></string>
@@ -40991,7 +40993,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Thin Strokes</key>
-			<integer>1</integer>
+			<integer>3</integer>
 			<key>Transparency</key>
 			<real>0.053212832840236687</real>
 			<key>Unlimited Scrollback</key>
@@ -41904,7 +41906,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-10-25T18:29:12Z</date>
+	<date>2017-11-07T23:22:40Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Selection Respects Soft Boundaries</key>
