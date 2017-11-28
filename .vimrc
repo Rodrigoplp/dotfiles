@@ -163,9 +163,15 @@ highlight EndOfBuffer ctermfg=green
 " Spell check
 set spell
 highlight clear SpellBad
-highlight SpellCap cterm=underline ctermbg=NONE
-highlight Comment ctermfg=yellow
-highlight Statement ctermfg=white
+hi SpellBad cterm=underline,bold
+"highlight SpellCap cterm=underline ctermbg=NONE
+"highlight Comment ctermfg=yellow
+"highlight Statement ctermfg=white
+
+" Change cursor per mode
+let &t_EI = "\<Esc>]50;CursorShape=2\x7"	" Normal mode: underline
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"	" Insert mode: vertical line
+let &t_SR = "\<Esc>]50;CursorShape=0\x7"	" Replace mode: block
 
 " Yank to clipboard
 set clipboard=unnamed
@@ -206,18 +212,18 @@ au BufEnter *.md setlocal foldmethod=expr
 
 " Folding in txt files
 function! NeatFoldText()
-"	setlocal foldmethod=expr
-"	setlocal foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
-"	set foldtext=getline(v:foldstart)
+	setlocal foldmethod=expr
+	setlocal foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
+	set foldtext=getline(v:foldstart)
   
-	let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+"	let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+"  let lines_count = v:foldend - v:foldstart + 1
+"  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+"  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+"  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+"  let foldtextend = lines_count_text . repeat(foldchar, 8)
+"  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+"  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 
 autocmd BufNewFile,BufRead *.txt set foldmethod=indent
