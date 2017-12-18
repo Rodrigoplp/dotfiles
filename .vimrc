@@ -85,6 +85,13 @@ set mouse=a
 set cmdheight=1
 set laststatus=2
 
+" Centralize backups, swapfiles and undo history
+set backupdir=~/.vim/backups//
+set directory=~/.vim/swaps//
+if exists("&undodir")
+  set undodir=~/.vim/undo//
+endif
+
 " Vimwiki (https://github.com/vimwiki/vimwiki)
 set nocompatible
 filetype plugin on
