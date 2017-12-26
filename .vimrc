@@ -41,6 +41,9 @@ set wildmenu
 " Show partial commands in the last line of the screen
 set showcmd
  
+" Do not show intro message when opening Vim. Add 'I' to default.
+set shortmess+=I
+
 " Highlight searches (use <C-L> to temporarily turn off highlighting; see the
 " mapping of <C-L> below)
 set hlsearch
