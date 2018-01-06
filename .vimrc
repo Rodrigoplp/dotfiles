@@ -108,6 +108,7 @@ let g:instant_markdown_autostart = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='monochrome'
 set t_Co=256
+set background=light
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -289,6 +290,8 @@ nnoremap <space> za
 nmap =j :%!python -m json.tool<CR>
 nmap \f :!ranger<CR>
 map <leader>md :InstantMarkdownPreview<CR>
+cmap W w
+cmap Q q
 
 " Deleting does not replace clipboard
 nnoremap d "_d
