@@ -87,6 +87,7 @@ set mouse=a
 " 'press <Enter> to continue'
 set cmdheight=1
 set laststatus=2
+set noshowmode		" Hide -- INSERT -- alert since it already is part of the statusline
 
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups//
@@ -175,6 +176,7 @@ highlight EndOfBuffer ctermfg=green
 set spell
 highlight clear SpellBad
 hi SpellBad cterm=underline,bold
+set spelllang=en_us		" spelllang=en_us,fr
 "highlight SpellCap cterm=underline ctermbg=NONE
 "highlight Comment ctermfg=yellow
 "highlight Statement ctermfg=white
