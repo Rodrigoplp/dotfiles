@@ -39589,7 +39589,7 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSColorPanelMode</key>
-	<string>7</string>
+	<string>3</string>
 	<key>NSColorPickerPreferredRGBEntryMode</key>
 	<integer>2</integer>
 	<key>NSColorPickerSlidersDefaults</key>
@@ -39610,6 +39610,11 @@
 	<false/>
 	<key>NSScrollViewShouldScrollUnderTitlebar</key>
 	<false/>
+	<key>NSSplitView Subview Frames NSColorPanelSplitView</key>
+	<array>
+		<string>0.000000, 0.000000, 228.000000, 351.000000, NO, NO</string>
+		<string>0.000000, 352.000000, 228.000000, 43.000000, NO, NO</string>
+	</array>
 	<key>NSTableView Columns v2 KeyBingingTable</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -39639,7 +39644,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>685 314 228 349 0 0 2560 1440 </string>
+	<string>685 295 228 332 0 0 2560 1440 </string>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>2049 110 445 551 0 0 2560 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
@@ -39647,9 +39652,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 139 606 469 0 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>706 926 918 452 0 0 2560 1440 </string>
+	<string>706 1018 918 381 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 24 2560 1416 0 0 2560 1440 </string>
+	<string>1 24 1277 1416 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1281 0 1277 1440 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -40500,15 +40505,15 @@
 			<key>Badge Color</key>
 			<dict>
 				<key>Alpha Component</key>
-				<real>0.46478271484375</real>
+				<real>0.39891909246575341</real>
 				<key>Blue Component</key>
-				<real>0.51372551918029785</real>
+				<real>0.58545482158660889</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.40392154455184937</real>
+				<real>0.48383635282516479</real>
 				<key>Red Component</key>
-				<real>0.42352944612503052</real>
+				<real>0.49950283765792847</real>
 			</dict>
 			<key>Badge Text</key>
 			<string>\(session.path)</string>
@@ -40993,7 +40998,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Thin Strokes</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>Transparency</key>
 			<real>0.11824297243414533</real>
 			<key>Unlimited Scrollback</key>
@@ -41908,7 +41913,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-12-15T02:10:52Z</date>
+	<date>2018-01-12T02:10:29Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Selection Respects Soft Boundaries</key>

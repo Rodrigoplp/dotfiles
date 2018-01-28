@@ -50,7 +50,7 @@ set hlsearch
  
 " Modelines have historically been a source of security vulnerabilities. As
 " such, it may be a good idea to disable them and use the securemodelines
-" script, <http://www.vim.org/scripts/script.php?script_id=1876>.
+" script, <HTTP://www.vim.org/scripts/script.php?script_id=1876>.
 " set nomodeline
  
 " Use case insensitive search, except when using capital letters
@@ -65,7 +65,7 @@ set backspace=indent,eol,start
 set autoindent
  
 " Stop certain movements from always going to the first character of a line.
-" While this behaviour deviates from that of Vi, it does what most users
+" While this behavior deviates from that of Vi, it does what most users
 " coming from other editors would expect.
 "set nostartofline
  
@@ -87,7 +87,6 @@ set mouse=a
 " 'press <Enter> to continue'
 set cmdheight=1
 set laststatus=2
-set noshowmode		" Hide -- INSERT -- alert since it already is part of the statusline
 
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups//
@@ -242,6 +241,9 @@ endfunction
 autocmd BufNewFile,BufRead *.txt set foldmethod=indent
 autocmd BufNewFile,BufRead *.txt set foldtext=NeatFoldText()
 
+" Hide duplicate -- INSERT -- warning
+set noshowmode
+
 " Language dependent configurations
 
 " Python
@@ -296,10 +298,10 @@ cmap W w
 cmap Q q
 
 " Deleting does not replace clipboard
-nnoremap d "_d
-vnoremap d "_d
-nnoremap D "_D
-vnoremap D "_D
+" nnoremap d "_d
+" vnoremap d "_d
+" nnoremap D "_D
+" vnoremap D "_D
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
