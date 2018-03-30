@@ -1,5 +1,5 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
+filetype off									" required
 
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -17,7 +17,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'enricobacis/vim-airline-clock'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vimwiki/vimwiki'
-" Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
+Plugin 'chemzqm/vim-jsx-improve'
 " Plugin 'mxw/vim-jsx'
 
 call vundle#end()            " required
@@ -100,7 +101,17 @@ set nocompatible
 filetype plugin on
 syntax on
 let g:vimwiki_list = [{'syntax': 'markdown', 'ext': '.md'}]
- 
+
+" Insert skeleton of timesheet text
+function! Timesheet()
+	call append("$", "## " . strftime("%Y-%m-%d"))
+	call append("$", "")
+	call append("$", "- 09:30 - 12:30 [3:00]")
+	call append("$", "- 13:30 - 16:30 [3:00]")
+	call append("$", "- 16:30 - 18:30 [2:00]")
+endfunction
+nmap <F2> :call Timesheet()<CR>
+
 " Vim-instant-markdown (https://github.com/suan/vim-instant-markdown)
 let g:instant_markdown_autostart = 0
 
@@ -174,7 +185,8 @@ highlight EndOfBuffer ctermfg=green
 " Spell check
 set spell
 highlight clear SpellBad
-hi SpellBad cterm=underline,bold
+hi SpellBad cterm=underline ctermbg=none ctermfg=LightRed
+hi SpellLocal cterm=underline ctermbg=none ctermfg=LightRed
 set spelllang=en_us		" spelllang=en_us,fr
 "highlight SpellCap cterm=underline ctermbg=NONE
 "highlight Comment ctermfg=yellow
@@ -275,6 +287,9 @@ com! Json %!python -m json.tool
 autocmd BufNewFile,BufRead *.xml set tabstop=2
 autocmd BufNewFile,BufRead *.xml set softtabstop=2
 autocmd BufNewFile,BufRead *.xml set shiftwidth=2
+
+" Markdown
+hi htmlItalic ctermfg=grey ctermbg=none cterm=none
 
 "------------------------------------------------------------
 " Mappings
