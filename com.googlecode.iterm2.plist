@@ -39650,13 +39650,13 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>970 787 620 392 0 0 2560 1440 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>269 382 599 388 0 0 2560 1440 </string>
+	<string>269 382 606 469 0 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>706 982 918 452 0 0 2560 1440 </string>
+	<string>706 1005 770 429 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1 0 1277 1440 0 0 2560 1440 </string>
+	<string>1 721 1277 718 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1 0 1277 1440 0 0 2560 1440 </string>
+	<string>1281 0 1277 1440 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>0 0 2560 1440 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -40405,7 +40405,7 @@
 			<key>Thin Strokes</key>
 			<integer>2</integer>
 			<key>Transparency</key>
-			<real>0.32598607205343472</real>
+			<real>0.20017309616510987</real>
 			<key>Triggers</key>
 			<array>
 				<dict>
@@ -43392,7 +43392,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-02-18T20:31:25Z</date>
+	<date>2018-03-31T02:38:42Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Selection Respects Soft Boundaries</key>
@@ -43402,7 +43402,7 @@
 	<key>ShowPaneTitles</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.16080979567307693</real>
+	<real>0.17957732371794871</real>
 	<key>TabStyle</key>
 	<integer>1</integer>
 	<key>TabViewType</key>

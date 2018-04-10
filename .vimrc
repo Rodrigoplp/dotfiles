@@ -104,11 +104,12 @@ let g:vimwiki_list = [{'syntax': 'markdown', 'ext': '.md'}]
 
 " Insert skeleton of timesheet text
 function! Timesheet()
-	call append("$", "## " . strftime("%Y-%m-%d"))
-	call append("$", "")
-	call append("$", "- 09:30 - 12:30 [3:00]")
-	call append("$", "- 13:30 - 16:30 [3:00]")
-	call append("$", "- 16:30 - 18:30 [2:00]")
+	call append(line('.'), "")
+	call append(line('.'), "- 16:30 - 18:30 [2:00]")
+	call append(line('.'), "- 13:30 - 16:30 [3:00]")
+	call append(line('.'), "- 09:30 - 12:30 [3:00]")
+	call append(line('.'), "")
+	call append(line('.'), "### " . strftime("%Y-%m-%d %a"))
 endfunction
 nmap <F2> :call Timesheet()<CR>
 
