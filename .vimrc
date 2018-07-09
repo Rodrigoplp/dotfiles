@@ -16,9 +16,9 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'enricobacis/vim-airline-clock'
 Plugin 'tmhedberg/SimpylFold'
-Plugin 'vimwiki/vimwiki'
 Plugin 'pangloss/vim-javascript'
 Plugin 'chemzqm/vim-jsx-improve'
+Plugin 'kballard/vim-swift'
 " Plugin 'mxw/vim-jsx'
 
 call vundle#end()            " required
@@ -312,6 +312,10 @@ nmap \f :!ranger<CR>
 map <leader>md :InstantMarkdownPreview<CR>
 cmap W w
 cmap Q q
+
+" Comment line
+map ) I// <Esc>
+map ( ^3x
 
 " Deleting does not replace clipboard
 " nnoremap d "_d
