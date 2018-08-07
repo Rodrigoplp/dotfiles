@@ -12,14 +12,10 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'enricobacis/vim-airline-clock'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'pangloss/vim-javascript'
 Plugin 'chemzqm/vim-jsx-improve'
 Plugin 'kballard/vim-swift'
-" Plugin 'mxw/vim-jsx'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -96,12 +92,6 @@ if exists("&undodir")
   set undodir=~/.vim/undo//
 endif
 
-" Vimwiki (https://github.com/vimwiki/vimwiki)
-set nocompatible
-filetype plugin on
-syntax on
-let g:vimwiki_list = [{'syntax': 'markdown', 'ext': '.md'}]
-
 " Insert skeleton of timesheet text
 function! Timesheet()
 	call append(line('.'), "")
@@ -116,53 +106,91 @@ nmap <F2> :call Timesheet()<CR>
 " Vim-instant-markdown (https://github.com/suan/vim-instant-markdown)
 let g:instant_markdown_autostart = 0
 
-" Airline
-let g:airline_powerline_fonts = 1
-let g:airline_theme='monochrome'
+syntax on
 set t_Co=256
 set background=light
 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
+" Status bar
+hi User1 ctermbg=none ctermfg=gray
+hi User2 ctermbg=none ctermfg=gray
+hi User3 ctermbg=none ctermfg=gray
+hi User4 ctermbg=none ctermfg=white
 
-" Unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_symbols.space = "\ua0"
-
-" Airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
-" Airline sections
-function! AirlineInit()
-	let g:airline_section_a = airline#section#create(['mode'])
-	let g:airline_section_x = airline#section#create(['%P'])
-	let g:airline_section_y = 'Col %c'
-	let g:airline_section_z = '%L lines'
-	let g:airline_section_error = airline#section#create([])
-	let g:airline_section_warning = airline#section#create([])
+function! InsertStatuslineColor(mode)
+	if a:mode == 'i'
+		hi User1 ctermbg=51 ctermfg=blue
+		hi User2 ctermbg=51 ctermfg=blue
+		hi User3 ctermbg=none ctermfg=51
+		hi User4 ctermbg=none ctermfg=51
+	elseif a:mode == 'r'
+		hi User1 ctermbg=none ctermfg=gray
+		hi User2 ctermbg=none ctermfg=gray
+		hi User3 ctermbg=none ctermfg=black
+		hi User4 ctermbg=none ctermfg=black
+	elseif a:mode == 'v'
+		hi User1 ctermbg=none ctermfg=gray
+		hi User2 ctermbg=none ctermfg=gray
+		hi User3 ctermbg=none ctermfg=black
+		hi User4 ctermbg=none ctermfg=black
+	else
+		hi User1 ctermbg=none ctermfg=gray
+		hi User2 ctermbg=none ctermfg=gray
+		hi User3 ctermbg=none ctermfg=black
+		hi User4 ctermbg=none ctermfg=black
+	endif
 endfunction
-autocmd VimEnter * call AirlineInit()
 
-" Airline clock settings
-let g:airline#extensions#clock#format = '%a, %b %d, %H:%M'
+function! ModeName(mode)
+	if a:mode == 'i'
+		return 'Insert'
+	elseif a:mode == 'v'
+		hi User1 ctermbg=202 ctermfg=blue
+		hi User2 ctermbg=202 ctermfg=blue
+		hi User3 ctermbg=none ctermfg=202
+		hi User4 ctermbg=none ctermfg=202
+		redrawstatus
+		return 'Visual'
+	else
+		hi User1 ctermbg=none ctermfg=gray
+		hi User2 ctermbg=none ctermfg=gray
+		hi User3 ctermbg=none ctermfg=gray
+		hi User4 ctermbg=none ctermfg=white
+		redrawstatus
+		return 'Normal'
+	endif
+endfunction
+
+au InsertEnter * call InsertStatuslineColor(v:insertmode)
+au InsertLeave * hi User1 ctermbg=none ctermfg=gray
+au InsertLeave * hi User2 ctermbg=none ctermfg=gray
+au InsertLeave * hi User3 ctermbg=none ctermfg=white
+au InsertLeave * hi User4 ctermbg=none ctermfg=white
+
+function! ActiveStatus()
+  let statusline=""
+  let statusline.="%1*"
+	let statusline.="\ %{ModeName(mode())}\ "
+  let statusline.="%2*"
+	let statusline.=""
+	let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':'\ [not versd]\ '}"
+  let statusline.="%3*"
+  let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
+	let statusline.="%4*"
+  let statusline.="\ %.100F"
+  let statusline.="%{&readonly?'\ \ ':''}"
+  let statusline.="%="
+  let statusline.="\ %{''!=#&filetype?&filetype:'none'}\ "
+  let statusline.="%3*"
+  let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
+	let statusline.="%2*"
+  let statusline.="\ %v|%l/%L"					" Column number | Row number / total lines
+	let statusline.="%1*"
+	let statusline.="\ \ %{strftime('%a %b-%d %H:%M')}\ "			" Date time clock
+
+  return statusline
+endfunction
+
+set statusline=%!ActiveStatus()
 
 " Display line numbers on the left
 set number
@@ -189,9 +217,6 @@ highlight clear SpellBad
 hi SpellBad cterm=underline ctermbg=none ctermfg=LightRed
 hi SpellLocal cterm=underline ctermbg=none ctermfg=LightRed
 set spelllang=en_us		" spelllang=en_us,fr
-"highlight SpellCap cterm=underline ctermbg=NONE
-"highlight Comment ctermfg=yellow
-"highlight Statement ctermfg=white
 
 " Change cursor per mode
 let &t_EI = "\<Esc>]50;CursorShape=2\x7"	" Normal mode: underline
@@ -240,15 +265,6 @@ function! NeatFoldText()
 	setlocal foldmethod=expr
 	setlocal foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
 	set foldtext=getline(v:foldstart)
-  
-"	let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-"  let lines_count = v:foldend - v:foldstart + 1
-"  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-"  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-"  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-"  let foldtextend = lines_count_text . repeat(foldchar, 8)
-"  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-"  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 
 autocmd BufNewFile,BufRead *.txt set foldmethod=indent
@@ -276,6 +292,7 @@ autocmd BufNewFile,BufRead *.js set shiftwidth=2
 autocmd BufNewFile,BufRead *.html set tabstop=2
 autocmd BufNewFile,BufRead *.html set softtabstop=2
 autocmd BufNewFile,BufRead *.html set shiftwidth=2
+autocmd BufNewFile,BufRead *.html hi error ctermbg=none ctermfg=gray
 
 autocmd BufNewFile,BufRead *.css set tabstop=2
 autocmd BufNewFile,BufRead *.css set softtabstop=2
@@ -283,6 +300,10 @@ autocmd BufNewFile,BufRead *.css set shiftwidth=2
 
 " JSON
 com! Json %!python -m json.tool
+autocmd BufNewFile,BufRead *.json set fdm=syntax        " Change folding rule
+autocmd BufNewFile,BufRead *.json set nospell
+autocmd BufNewFile,BufRead *.json hi constant ctermfg=gray
+autocmd BufNewFile,BufRead *.json hi error ctermbg=none
 
 " XML
 autocmd BufNewFile,BufRead *.xml set tabstop=2
@@ -313,9 +334,14 @@ map <leader>md :InstantMarkdownPreview<CR>
 cmap W w
 cmap Q q
 
+" Automatically closing braces
+inoremap {<CR> {<CR>}<Esc>ko<tab>
+inoremap [<CR> [<CR>]<Esc>ko<tab>
+inoremap (<CR> (<CR>)<Esc>ko<tab>
+
 " Comment line
-map ) I// <Esc>
-map ( ^3x
+map ( I// <Esc>
+map ) ^3x
 
 " Deleting does not replace clipboard
 " nnoremap d "_d
