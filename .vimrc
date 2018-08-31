@@ -169,7 +169,7 @@ function! ActiveStatus()
 	let statusline.="%2*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%3*"
-	let statusline.="\ %{fugitive#head()!=''?'\ '.fugitive#head().'\ ':'[not versd]\ '}"
+	let statusline.="\ %{fugitive#head()!=''?''.fugitive#head().'\ ':'[not versd]\ '}"
 	let statusline.="%4*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%5*"
@@ -196,87 +196,6 @@ let timer = timer_start(4000, 'UpdateStatusBar',{'repeat':-1})
 function! UpdateStatusBar(timer)
   execute 'let &ro = &ro'
 endfunction
-
-" hi User1 ctermbg=none ctermfg=gray
-" hi User2 ctermbg=none ctermfg=gray
-" hi User3 ctermbg=none ctermfg=gray
-" hi User4 ctermbg=none ctermfg=white
-" 
-" function! InsertStatuslineColor(mode)
-" 	if a:mode == 'i'
-" 		hi User1 ctermbg=51 ctermfg=blue
-" 		hi User2 ctermbg=51 ctermfg=blue
-" 		hi User3 ctermbg=none ctermfg=51
-" 		hi User4 ctermbg=none ctermfg=51
-" 	elseif a:mode == 'r'
-" 		hi User1 ctermbg=none ctermfg=gray
-" 		hi User2 ctermbg=none ctermfg=gray
-" 		hi User3 ctermbg=none ctermfg=black
-" 		hi User4 ctermbg=none ctermfg=black
-" 	elseif a:mode == 'v'
-" 		hi User1 ctermbg=none ctermfg=gray
-" 		hi User2 ctermbg=none ctermfg=gray
-" 		hi User3 ctermbg=none ctermfg=black
-" 		hi User4 ctermbg=none ctermfg=black
-" 	else
-" 		hi User1 ctermbg=none ctermfg=gray
-" 		hi User2 ctermbg=none ctermfg=gray
-" 		hi User3 ctermbg=none ctermfg=black
-" 		hi User4 ctermbg=none ctermfg=black
-" 	endif
-" endfunction
-" 
-" function! ModeName(mode)
-" 	if a:mode == 'i'
-" 		return 'Insert'
-" 	elseif a:mode == 'v'
-" 		hi User1 ctermbg=202 ctermfg=blue
-" 		hi User2 ctermbg=202 ctermfg=blue
-" 		hi User3 ctermbg=none ctermfg=202
-" 		hi User4 ctermbg=none ctermfg=202
-" 		redrawstatus
-" 		return 'Visual'
-" 	else
-" 		hi User1 ctermbg=none ctermfg=gray
-" 		hi User2 ctermbg=none ctermfg=gray
-" 		hi User3 ctermbg=none ctermfg=gray
-" 		hi User4 ctermbg=none ctermfg=white
-" 		redrawstatus
-" 		return 'Normal'
-" 	endif
-" endfunction
-" 
-" au InsertEnter * call InsertStatuslineColor(v:insertmode)
-" au InsertLeave * hi User1 ctermbg=none ctermfg=gray
-" au InsertLeave * hi User2 ctermbg=none ctermfg=gray
-" au InsertLeave * hi User3 ctermbg=none ctermfg=white
-" au InsertLeave * hi User4 ctermbg=none ctermfg=white
-" 
-" function! ActiveStatus()
-"   let statusline=""
-"   let statusline.="%1*"
-" 	let statusline.="\ %{ModeName(mode())}\ "
-"   let statusline.="%2*"
-" 	let statusline.=""
-" 	let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':'\ [not versd]\ '}"
-"   let statusline.="%3*"
-"   let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
-" 	let statusline.="%4*"
-"   let statusline.="\ %.100F"
-"   let statusline.="%{&readonly?'\ \ ':''}"
-"   let statusline.="%="
-"   let statusline.="\ %{''!=#&filetype?&filetype:'none'}\ "
-"   let statusline.="%3*"
-"   let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
-" 	let statusline.="%2*"
-"   let statusline.="\ %v|%l/%L"					" Column number | Row number / total lines
-" 	let statusline.="%1*"
-" 	let statusline.="\ \ %{strftime('%a %b-%d %H:%M')}\ "			" Date time clock
-" 
-"   return statusline
-" endfunction
-" 
-" set statusline=%!ActiveStatus()
 
 " Display line numbers on the left
 set number
@@ -345,6 +264,23 @@ function MarkdownLevel()
 endfunction
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()
 au BufEnter *.md setlocal foldmethod=expr
+
+" Folding in js and jsx files
+function JsLevel() 
+	let h = matchstr(getline(v:lnum), '// MARK:') 
+	let h2 = matchstr(getline(v:lnum), '// MARK: -') 
+	if empty(h) 
+		return "=" 
+	elseif empty(h2) 
+		return ">1"
+	else
+		return ">2"
+	endif 
+endfunction
+au BufEnter *.js setlocal foldexpr=JsLevel()
+au BufEnter *.js setlocal foldmethod=expr
+au BufEnter *.jsx setlocal foldexpr=JsLevel()
+au BufEnter *.jsx setlocal foldmethod=expr
 
 " Folding in txt files
 function! NeatFoldText()
