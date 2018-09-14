@@ -109,6 +109,7 @@ let g:instant_markdown_autostart = 0
 syntax on
 set t_Co=256
 set background=light
+"colorscheme Base2Tone_ForestDark
 
 " Status bar
 hi User1 ctermbg=none ctermfg=gray
@@ -242,7 +243,7 @@ set shiftwidth=2
 " Set space as character in split separator
 set fillchars+=vert:\ 
 highlight VertSplit ctermfg=black
-highlight Folded ctermfg=12
+"highlight Folded ctermfg=12
 set splitbelow
 set splitright
 
@@ -355,11 +356,63 @@ nmap \f :!ranger<CR>
 map <leader>md :InstantMarkdownPreview<CR>
 cmap W w
 cmap Q q
+map 0 ^
 
-" Automatically closing braces
-inoremap {<CR> {<CR>}<Esc>ko<tab>
-inoremap [<CR> [<CR>]<Esc>ko<tab>
-inoremap (<CR> (<CR>)<Esc>ko<tab>
+" Automatic closures
+inoremap {<CR> {<CR>}<Esc>ko
+inoremap [<CR> [<CR>]<Esc>ko
+inoremap (<CR> (<CR>)<Esc>ko
+inoremap { {}<Esc>i
+inoremap [ []<Esc>i
+inoremap ( ()<Esc>i
+inoremap " ""<Esc>i
+autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
+inoremap ) <c-r>=ClosePair(')')<CR>
+inoremap ] <c-r>=ClosePair(']')<CR>
+inoremap } <c-r>=CloseBracket()<CR>
+inoremap " <c-r>=QuoteDelim('"')<CR>
+inoremap ' <c-r>=QuoteDelim("'")<CR>
+
+function ClosePair(char)
+	if getline('.')[col('.') - 1] == a:char
+		return "\<Right>"
+	else
+		return a:char
+	endif
+endf
+
+function CloseBracket()
+	if match(getline(line('.') + 1), '\s*}') < 0
+		return "\<CR>}"
+	else
+		return "\<Esc>j0f}a"
+	endif
+endf
+
+function QuoteDelim(char)
+	let line = getline('.')
+	let col = col('.')
+	let list = ['=', '{', '[', '(', '<', '+', '-']
+
+	if col == 1
+		return a:char.a:char."\<Esc>i"
+	endif
+
+	for item in list
+		if line[col - 2] == item
+			return a:char.a:char."\<Esc>i"
+		endif
+	endfor
+
+	if line[col - 2] == "\<Space>"
+		return a:char.a:char."\<Esc>i"
+	elseif line[col - 1] == a:char
+		"Escaping out of the string
+		return "\<Right>"
+	else
+		return a:char
+	endif
+endf
 
 " Comment line
 map ( I// <Esc>
