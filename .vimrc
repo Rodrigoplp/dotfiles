@@ -16,6 +16,7 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'pangloss/vim-javascript'
 Plugin 'chemzqm/vim-jsx-improve'
 Plugin 'kballard/vim-swift'
+Plugin 'posva/vim-vue'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -356,7 +357,19 @@ nmap \f :!ranger<CR>
 map <leader>md :InstantMarkdownPreview<CR>
 cmap W w
 cmap Q q
-map 0 ^
+map 0 :call LineHome()<CR>
+
+" First character of line or beginning of line
+function! LineHome()
+	let x = col('.')
+	execute "normal ^"
+	if x == col('.')
+		unmap 0
+		execute "normal 0"
+		map 0 :call LineHome()<CR>:echo<CR>
+	endif
+	return ""
+endfunction
 
 " Automatic closures
 inoremap {<CR> {<CR>}<Esc>ko
