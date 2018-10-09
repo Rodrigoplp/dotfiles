@@ -65,7 +65,6 @@ hdr_order from: to: cc: date: subject:  # and in this order
 # Yahoo
 set realname 							= "Rodrigo Pinto"
 set imap_user 						= "rodrigo_plp@yahoo.com"
-set imap_pass							= "6cV-4y8-o6g-9Xt"
 set imap_check_subscribed = yes
 set imap_list_subscribed 	= yes
 set imap_idle
