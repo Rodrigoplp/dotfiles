@@ -14,9 +14,11 @@ Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
 Plugin 'chemzqm/vim-jsx-improve'
 Plugin 'kballard/vim-swift'
 Plugin 'posva/vim-vue'
+Plugin 'alvan/vim-closetag'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -38,7 +40,30 @@ set wildmenu
  
 " Show partial commands in the last line of the screen
 set showcmd
- 
+
+" Make Shift + arrow behave as selector instead of page jumper
+"if exists('$TMUX')
+	nmap <S-Up> v<Up>
+	nmap <S-Down> v<Down>
+	nmap <S-Left> v<Left>
+	nmap <S-Right> v<Right>
+	vmap <S-Up> <Up>
+	vmap <S-Down> <Down>
+	vmap <S-Left> <Left>
+	vmap <S-Right> <Right>
+	imap <S-Up> <Esc>v<Up>
+	imap <S-Down> <Esc>v<Down>
+	imap <S-Left> <Esc>v<Left>
+	imap <S-Right> <Esc>v<Right>
+"else
+"	set keymodel=startsel,stopsel
+"endif
+
+" Also mapping ctrl-c, ctrl-v, ctrl-x and ctrl-z
+vmap <C-c> y<Esc>
+vmap <C-x> d<Esc>
+imap <C-z> <Esc>u
+
 " Do not show intro message when opening Vim. Add 'I' to default.
 set shortmess+=I
 
@@ -110,22 +135,16 @@ let g:instant_markdown_autostart = 0
 syntax on
 set t_Co=256
 set background=light
-"colorscheme Base2Tone_ForestDark
+colorscheme Base2Tone_ForestDark
 
 " Status bar
-hi User1 ctermbg=none ctermfg=gray
-hi User2 ctermbg=none ctermfg=gray
-hi User3 ctermbg=none ctermfg=gray
-hi User4 ctermbg=none ctermfg=gray
-hi User5 ctermbg=none ctermfg=white
-
 function! InsertStatuslineColor(mode)
 	if a:mode == 'i'
 		hi User1 ctermbg=37 ctermfg=black
 		hi User2 ctermbg=44 ctermfg=37
 		hi User3 ctermbg=44 ctermfg=white
-		hi User4 ctermbg=none ctermfg=44			" Use ctermbg=51 for a brighter version
-		hi User5 ctermbg=none ctermfg=51			" Use ctermbg=51 for a brighter version
+		hi User4 ctermbg=none ctermfg=44
+		hi User5 ctermbg=none ctermfg=51
 	elseif a:mode == 'r'
 		hi User5 ctermbg=none ctermfg=240
 	elseif a:mode == 'v'
@@ -147,22 +166,17 @@ function! ModeName(mode)
 		redrawstatus
 		return 'Visual'
 	else
-		hi User1 ctermbg=none ctermfg=gray
-		hi User2 ctermbg=none ctermfg=gray
-		hi User3 ctermbg=none ctermfg=gray
-		hi User4 ctermbg=none ctermfg=gray
-		hi User5 ctermbg=none ctermfg=white
+		hi User1 ctermbg=none ctermfg=33
+		hi User2 ctermbg=none ctermfg=33
+		hi User3 ctermbg=none ctermfg=33
+		hi User4 ctermbg=none ctermfg=33
+		hi User5 ctermbg=none ctermfg=232
 		redrawstatus
 		return 'Normal'
 	endif
 endfunction
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi User1 ctermbg=none ctermfg=gray
-au InsertLeave * hi User2 ctermbg=none ctermfg=gray
-au InsertLeave * hi User3 ctermbg=none ctermfg=gray
-au InsertLeave * hi User4 ctermbg=none ctermfg=gray
-au InsertLeave * hi User5 ctermbg=none ctermfg=240
 
 function! ActiveStatus()
 	let statusline=""
@@ -171,7 +185,7 @@ function! ActiveStatus()
 	let statusline.="%2*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%3*"
-	let statusline.="\ %{fugitive#head()!=''?''.fugitive#head().'\ ':'[not versd]\ '}"
+	let statusline.="\ %{fugitive#head()!=''?'\ '.fugitive#head().'\ ':'\ [not versd]\ '}"
 	let statusline.="%4*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%5*"
@@ -182,7 +196,7 @@ function! ActiveStatus()
 	let statusline.="%4*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%3*"
-	let statusline.="\ %v|%l/%L\ "			" Column number | Row number / total lines
+	let statusline.="\ %vC|%l/%LL\ %p%%\ "			" Column number | Row number / total lines
 	let statusline.="%2*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%1*"
@@ -317,6 +331,7 @@ autocmd BufNewFile,BufRead *.html set tabstop=2
 autocmd BufNewFile,BufRead *.html set softtabstop=2
 autocmd BufNewFile,BufRead *.html set shiftwidth=2
 autocmd BufNewFile,BufRead *.html hi error ctermbg=none ctermfg=gray
+autocmd BufNewFile,BufRead *.html set filetype=htmlm4
 
 autocmd BufNewFile,BufRead *.css set tabstop=2
 autocmd BufNewFile,BufRead *.css set softtabstop=2
@@ -379,7 +394,7 @@ inoremap { {}<Esc>i
 inoremap [ []<Esc>i
 inoremap ( ()<Esc>i
 inoremap " ""<Esc>i
-autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
+"autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
 inoremap ) <c-r>=ClosePair(')')<CR>
 inoremap ] <c-r>=ClosePair(']')<CR>
 inoremap } <c-r>=CloseBracket()<CR>
