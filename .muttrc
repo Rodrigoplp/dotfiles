@@ -19,6 +19,7 @@ folder-hook . 'set read_inc=1000'
 set wait_key = no        # shut up, mutt
 set mbox_type = Maildir  # mailbox type
 set timeout = 3          # idle time before scanning
+set sleep_time = 0			 # be fast
 set mail_check = 300     # minimum time between scans
 unset move               # gmail does that
 set delete               # don't ask, just do
@@ -79,6 +80,8 @@ set from									= "rodrigo_plp@yahoo.com"
 
 set editor								= 'vim + -c "set textwidth=72" -c "set wrap"'
 
+mailboxes	"imaps://imap.mail.yahoo.com/INBOX"
+
 # # Default inbox.
 # set spoolfile = "+steve-stevelosh.com/INBOX"
 # 
@@ -133,9 +136,9 @@ color sidebar_new green black
 color normal black default
 
 # Sidebar Navigation ---------------------------------
-bind index,pager <down>   sidebar-next
-bind index,pager <up>     sidebar-prev
-bind index,pager <right>  sidebar-open
+bind index <down>   sidebar-next
+bind index <up>     sidebar-prev
+bind index <right>  sidebar-open
 bind index,pager B sidebar-toggle-visible
 
 # Pager View Options ---------------------------------
@@ -160,3 +163,92 @@ bind pager R  group-reply
 
 # View attachments properly.
 bind attach <return> view-mailcap
+
+# Colors ---------------------------------------------
+
+color normal brightyellow default
+color error red default
+color tilde black default
+color message cyan default
+color markers red white
+color attachment white default
+color search brightmagenta default
+color status brightyellow black
+color indicator brightblack yellow
+color tree yellow default
+
+# Basic monocolor screen
+
+mono bold bold
+mono underline underline
+mono indicator reverse
+mono error bold
+
+# Index
+
+color index red default "~A" # all messages
+color index brightred default "~E" # expired messages
+color index blue default "~N" # new messages
+color index blue default "~O" # old messages
+color index brightmagenta default "~Q" # messages that have been replied to
+color index brightgreen default "~R" # read messages
+color index blue default "~U" # unread messages
+color index blue default "~U~$" # unread, unreferenced messages
+color index brightyellow default "~v" # messages part of a collapsed thread
+color index brightyellow default "~P" # messages from me
+color index cyan default "~p!~F" # messages to me
+color index cyan default "~N~p!~F" # new messages to me
+color index cyan default "~U~p!~F" # unread messages to me
+color index brightgreen default "~R~p!~F" # messages to me
+color index red default "~F" # flagged messages
+color index red default "~F~p" # flagged messages to me
+color index red default "~N~F" # new flagged messages
+color index red default "~N~F~p" # new flagged messages to me
+color index red default "~U~F~p" # new flagged messages to me
+color index black red "~D" # deleted messages
+color index brightcyan default "~v~(!~N)" # collapsed thread with no unread
+color index yellow default "~v~(~N)" # collapsed thread with some unread
+color index green default "~N~v~(~N)" # collapsed thread with unread parent
+color index red black "~v~(~F)!~N" # collapsed thread with flagged, no unread
+color index yellow black "~v~(~F~N)" # collapsed thread with some unread & flagged
+color index green black "~N~v~(~F~N)" # collapsed thread with unread parent & flagged
+color index green black "~N~v~(~F)" # collapsed thread with unread parent, no unread inside, but some flagged
+color index cyan black "~v~(~p)" # collapsed thread with unread parent, no unread inside, some to me directly
+color index yellow red "~v~(~D)" # thread with deleted (doesn't differentiate between all or partial)
+
+# Message Headers
+
+color hdrdefault brightgreen default
+color header blue default "^(From)"
+color header blue default "^(Subject)"
+
+# Body
+
+color quoted blue default
+color quoted1 cyan default
+color quoted2 yellow default
+color quoted3 red default
+color quoted4 brightred default
+
+color signature brightgreen default
+color bold black default
+color underline black default
+color normal default default
+
+# PGP
+
+color body red default "(BAD signature)"
+color body cyan default "(Good signature)"
+color body brightblack default "^gpg: Good signature .*"
+color body brightyellow default "^gpg: "
+color body brightyellow red "^gpg: BAD signature from.*"
+mono body bold "^gpg: Good signature"
+mono body bold "^gpg: BAD signature from.*"
+
+# URL Regex
+
+color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+
+# Border lines
+
+color body blue default "( *[-+=#*~_]){6,}"
