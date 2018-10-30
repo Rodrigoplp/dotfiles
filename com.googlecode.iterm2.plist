@@ -39572,6 +39572,8 @@
 	<string>C4419E37-DA2D-473C-BBA8-7680353A8862</string>
 	<key>DimBackgroundWindows</key>
 	<false/>
+	<key>DimInactiveSplitPanes</key>
+	<false/>
 	<key>DimOnlyText</key>
 	<true/>
 	<key>HideTabCloseButton</key>
@@ -39589,7 +39591,7 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSColorPanelMode</key>
-	<string>3</string>
+	<string>7</string>
 	<key>NSColorPickerPreferredRGBEntryMode</key>
 	<integer>2</integer>
 	<key>NSColorPickerSlidersDefaults</key>
@@ -39612,8 +39614,8 @@
 	<false/>
 	<key>NSSplitView Subview Frames NSColorPanelSplitView</key>
 	<array>
-		<string>0.000000, 0.000000, 228.000000, 315.000000, NO, NO</string>
-		<string>0.000000, 316.000000, 228.000000, 43.000000, NO, NO</string>
+		<string>0.000000, 0.000000, 320.000000, 364.000000, NO, NO</string>
+		<string>0.000000, 365.000000, 320.000000, 43.000000, NO, NO</string>
 	</array>
 	<key>NSTableView Columns v2 KeyBingingTable</key>
 	<data>
@@ -39644,19 +39646,19 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>685 295 228 332 0 0 2560 1440 </string>
+	<string>779 284 320 345 0 0 2880 1620 </string>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>2049 110 445 551 0 0 2560 1440 </string>
+	<string>2359 126 445 417 0 0 2880 1620 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>970 787 620 392 0 0 2560 1440 </string>
+	<string>1130 748 620 622 0 0 2880 1620 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>269 382 606 469 0 0 2560 1440 </string>
+	<string>313 453 606 469 0 0 2880 1620 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>706 1005 770 429 0 0 2560 1440 </string>
+	<string>834 1219 928 394 0 0 2880 1620 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1 721 1277 718 0 0 2560 1440 </string>
+	<string>1441 7 1438 796 0 0 2880 1620 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1281 0 1277 1440 0 0 2560 1440 </string>
+	<string>1441 0 1438 1620 0 0 2880 1620 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>0 0 2560 1440 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -39700,26 +39702,26 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.59607845544815063</real>
+				<real>0.0</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.56078433990478516</real>
+				<real>0.066734083</real>
 				<key>Red Component</key>
-				<real>0.52549022436141968</real>
+				<real>0.58072251080000004</real>
 			</dict>
 			<key>Ansi 10 Color</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.35294118523597717</real>
+				<real>0.0</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.38431373238563538</real>
+				<real>0.97934550050000002</real>
 				<key>Red Component</key>
-				<real>0.4117647111415863</real>
+				<real>0.55634254220000001</real>
 			</dict>
 			<key>Ansi 11 Color</key>
 			<dict>
@@ -39791,26 +39793,26 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.35294118523597717</real>
+				<real>0.0039215688589999999</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.38431373238563538</real>
+				<real>0.48235294220000002</real>
 				<key>Red Component</key>
-				<real>0.4117647111415863</real>
+				<real>0.25098040700000002</real>
 			</dict>
 			<key>Ansi 3 Color</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.50980395078659058</real>
+				<real>0.58039215686274515</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.47843137383460999</real>
+				<real>0.55294117647058827</real>
 				<key>Red Component</key>
-				<real>0.45098039507865906</real>
+				<real>0.52549019607843139</real>
 			</dict>
 			<key>Ansi 4 Color</key>
 			<dict>
@@ -39882,13 +39884,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.58823531866073608</real>
+				<real>0.0</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.55294120311737061</real>
+				<real>0.14913141730000001</real>
 				<key>Red Component</key>
-				<real>0.51764708757400513</real>
+				<real>1</real>
 			</dict>
 			<key>BM Growl</key>
 			<true/>
@@ -40345,7 +40347,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodePro-Light 11</string>
+			<string>SourceCodePro-Light 12</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -43392,7 +43394,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-03-31T02:38:42Z</date>
+	<date>2018-10-25T05:51:51Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Selection Respects Soft Boundaries</key>
@@ -43416,7 +43418,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.5</string>
+	<string>3.2.3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>7</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
