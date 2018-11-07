@@ -1,0 +1,15 @@
+set realname 							= "Rodrigo Pinto"
+set imap_user 						= 
+set imap_pass 						= 
+set smtp_url 							= "smtp://$imap_user:$imap_pass@smtp.mail.yahoo.com:587"
+set ssl_starttls					= yes
+set imap_check_subscribed = yes
+set imap_list_subscribed 	= yes
+set imap_idle
+set imap_authenticators		= "login"
+set ssl_force_tls					= yes
+set folder 								= "imaps://imap.mail.yahoo.com:993"
+set spoolfile 						= "imaps://imap.mail.yahoo.com/INBOX"
+set postponed 						= "imaps://imap.mail.yahoo.com/Drafts"
+set record								= "imaps://imap.mail.yahoo.com/Sent"
+set from									= "rodrigo_plp@yahoo.com"
