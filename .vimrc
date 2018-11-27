@@ -136,6 +136,9 @@ syntax on
 set t_Co=256
 set background=light
 colorscheme Base2Tone_ForestDark
+hi LineNr ctermfg=grey
+hi CursorLine ctermbg=none
+hi CursorLineNr ctermbg=none ctermfg=blue
 
 " Status bar
 function! InsertStatuslineColor(mode)
@@ -196,7 +199,7 @@ function! ActiveStatus()
 	let statusline.="%4*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%3*"
-	let statusline.="\ %vC|%l/%LL\ %p%%\ "			" Column number | Row number / total lines
+	let statusline.="\ %{&ff=='mac'?'CR':&ff=='unix'?'LF':'CRLF'} %vC|%l/%LL\ %p%%\ "            " Column number | Row number / total lines
 	let statusline.="%2*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%1*"
@@ -362,11 +365,10 @@ nmap Y y$
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
-
-nmap - :Explore<Enter>
-nmap < <C-B>
-nmap > <C-F>
-nnoremap <space> za
+nmap < <C-B>																"Page up
+nmap > <C-F>																"Page down
+nmap - <C-B>																"Page up
+nnoremap <space> <C-F>											"Page down
 nmap =j :%!python -m json.tool<CR>
 nmap \f :!ranger<CR>
 map <leader>md :InstantMarkdownPreview<CR>
