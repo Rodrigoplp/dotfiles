@@ -138,7 +138,7 @@ set background=light
 colorscheme Base2Tone_ForestDark
 hi LineNr ctermfg=grey
 hi CursorLine ctermbg=none
-hi CursorLineNr ctermbg=none ctermfg=blue
+hi CursorLineNr ctermbg=none ctermfg=darkblue
 hi Comment ctermfg=blue
 hi Folded ctermfg=blue
 
