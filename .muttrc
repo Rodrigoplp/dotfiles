@@ -43,7 +43,7 @@ set sidebar_indent_string				= "  "
 
 # Status Bar -----------------------------------------
 set status_chars  = " *%A"
-set status_format = "[ Folder: %f ][%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%>%?p?( %p postponed )?"
+set status_format = "[ %f ][ %m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%> [ %p postponed ]"
 
 # Header Options -------------------------------------
 ignore *                                # ignore all headers
@@ -54,20 +54,11 @@ hdr_order from: to: cc: date: subject:  # and in this order
 # Account Settings -----------------------------------
 
 source ~/.mutt/accounts/yahoo.muttrc
-
+# folder-hook $folder 'source ~/.mutt/accounts/yahoo.muttrc'
 folder-hook Yahoo/* source ~/.mutt/accounts/yahoo.muttrc
-folder-hook Yahoo-br/* source ~/.mutt/accounts/yahoobr.muttrc
-
-# Gmail
-# set realname 						= "Rodrigo Pinto"
-# set imap_user						= "rodrigoplp@gmail.com"
-# set imap_authenticators	= "login"
-# set ssl_force_tls				= yes
-# set folder 							= "imaps://imap.gmail.com:993"
-# set spoolfile 					= "imaps://imap.gmail.com/INBOX"
-# set postponed 					= "+[Gmail]/Drafts"
-# set record							= "+[Gmail]/Sent Mail"
-# set smtp_url						= "smtp://rodrigoplp@smtp.gmail.com:587/"
+folder-hook YahooBR/* source ~/.mutt/accounts/yahoobr.muttrc
+folder-hook Gmail/* source ~/.mutt/accounts/gmail.muttrc
+macro index , "<enter-command>source ~/.mutt/accounts/gmail.muttrc<enter>"
 
 # Yahoo
 set sidebar_sort_method		= name
@@ -94,14 +85,19 @@ set charset								= iso-8859-1
 # set mbox      = "+steve-stevelosh.com/archive"
 # set postponed = "+steve-stevelosh.com/drafts"
 
+# Language settings ----------------------------------
+# set allow_8bit
+# set allow_ansi=yes                  # in msgs
+# charset-hook us-ascii iso-8859-1
+# set send_charset="us-ascii:iso-8859-1"
+
 # Index View Options ---------------------------------
-set status_format='-%f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'
 set date_format 		= "%e %b/%y %H:%M"
 set index_format 		= "[%Z]%?X?@& ?  %D  %-30.50F  %s"	# Flags, attachments, date, sender and subject
-set sort 						= threads														# like gmail
-set sort_aux 				= reverse-last-date-received
-set uncollapse_jump																			# don't collapse on an unread message
-set sort_re																							# thread based on regex
+set sort 						= threads                         	# like gmail
+set sort_aux 				= reverse-last-date-received  			# like gmail
+set uncollapse_jump                        							# don't collapse on an unread message
+set sort_re                                							# thread based on regex
 set reply_regexp 		= "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 
 # Index Key Bindings ---------------------------------
@@ -124,13 +120,17 @@ macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "ma
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
+# Open URLs in browser
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
 # Sidebar Navigation ---------------------------------
-bind index J   			sidebar-next
-bind index K     		sidebar-prev
-bind index <up>  		sidebar-next
-bind index <down>		sidebar-prev
+bind index <down>   sidebar-next
+bind index <up>     sidebar-prev
 bind index <right>  sidebar-open
-bind index,pager B	sidebar-toggle-visible
+bind index J			sidebar-next
+bind index K			sidebar-prev
+bind index,pager B sidebar-toggle-visible
 
 # Pager View Options ---------------------------------
 set pager_index_lines = 10 # number of index lines to show
@@ -142,6 +142,23 @@ unset markers              # no ugly plus signs
 
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 alternative_order text/plain text/enriched text/html"}})"
+
+# Compose View Options -------------------------------
+set realname = "Rodrigo P. L. Pinto" # who am i?
+set envelope_from                    # which from?
+set sig_dashes                       # dashes before sig
+set edit_headers                     # show headers when composing
+set fast_reply                       # skip to compose when replying
+set askcc                            # ask for CC:
+set fcc_attach                       # save attachments with the body
+unset mime_forward                   # forward attachments as part of body
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set attribution = "On %d, %n wrote:" # format of quoting header
+set reply_to                         # reply to Reply to: field
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+set forward_quote                    # include message in forwards
 
 # Pager Key Bindings ---------------------------------
 bind pager k  previous-line
@@ -156,5 +173,5 @@ bind pager R  group-reply
 bind attach <return> view-mailcap
 
 # Colors ---------------------------------------------
-
-source ~/.mutt/colors/colors-pc.muttrc
+source ~/.mutt/colors/colors-mac.muttrc
+# source ~/.mutt/colors/colors-pc.muttrc
