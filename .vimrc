@@ -10,15 +10,15 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-commentary'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'tmhedberg/SimpylFold'
-Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
+Plugin 'pangloss/vim-javascript'
 Plugin 'chemzqm/vim-jsx-improve'
 Plugin 'kballard/vim-swift'
 Plugin 'posva/vim-vue'
-Plugin 'alvan/vim-closetag'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -33,6 +33,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 filetype indent plugin on
+set omnifunc=syntaxcomplete#Complete
 set hidden
  
 " Better command-line completion
@@ -62,7 +63,19 @@ set showcmd
 " Also mapping ctrl-c, ctrl-v, ctrl-x and ctrl-z
 vmap <C-c> y<Esc>
 vmap <C-x> d<Esc>
-imap <C-z> <Esc>u
+inoremap <C-z> <C-G>u<Esc>[s1z=`]a<C-G>u
+nnoremap <C-z> <nop>			" Disable the standard behaviour of minimizing vim
+
+" Ranger as file explorer
+function RangerExplorer()
+	exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . system('echo "' . expand("%:p:h") . '" | sed -E "s/\ /\\\ /g"')
+	if filereadable('/tmp/vim_ranger_current_file')
+		exec 'edit ' . system('cat /tmp/vim_ranger_current_file | sed -E "s/\ /\\\ /g"')
+		call system('rm /tmp/vim_ranger_current_file')
+	endif
+	redraw!
+endfun
+map <Leader>x :call RangerExplorer()<CR>
 
 " Do not show intro message when opening Vim. Add 'I' to default.
 set shortmess+=I
@@ -78,7 +91,6 @@ set hlsearch
  
 " Use case insensitive search, except when using capital letters
 set ignorecase
-set smartcase
  
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
@@ -86,7 +98,7 @@ set backspace=indent,eol,start
 " When opening a new line and no filetype-specific indenting is enabled, keep
 " the same indent as the line you're currently on. Useful for READMEs, etc.
 set autoindent
- 
+
 " Stop certain movements from always going to the first character of a line.
 " While this behavior deviates from that of Vi, it does what most users
 " coming from other editors would expect.
@@ -121,13 +133,13 @@ endif
 " Insert skeleton of timesheet text
 function! Timesheet()
 	call append(line('.'), "")
-	call append(line('.'), "- 16:30 - 18:30 [2:00]")
-	call append(line('.'), "- 13:30 - 16:30 [3:00]")
-	call append(line('.'), "- 09:30 - 12:30 [3:00]")
+	call append(line('.'), "- 22:00 - 00:00 [2:00]")
+	call append(line('.'), "- 15:00 - 18:00 [3:00]")
+	call append(line('.'), "- 10:00 - 13:30 [3:30]")
 	call append(line('.'), "")
-	call append(line('.'), "### " . strftime("%Y-%m-%d %a"))
+	call append(line('.'), "#### " . strftime("%Y-%m-%d %a"))
 endfunction
-nmap <F2> :call Timesheet()<CR>
+nmap <F12> :call Timesheet()<CR>
 
 " Vim-instant-markdown (https://github.com/suan/vim-instant-markdown)
 let g:instant_markdown_autostart = 0
@@ -141,6 +153,7 @@ hi CursorLine ctermbg=none
 hi CursorLineNr ctermbg=none ctermfg=darkblue
 hi Comment ctermfg=blue
 hi Folded ctermfg=blue
+hi EndOfBuffer ctermfg=gray
 
 " Status bar
 function! InsertStatuslineColor(mode)
@@ -194,7 +207,7 @@ function! ActiveStatus()
 	let statusline.="%4*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%5*"
-	let statusline.="\ %.90F\ "
+	let statusline.="\ %.90F\ %m\ "
 	let statusline.="%{&readonly?'\ \ ':''}"
 	let statusline.="%="
 	let statusline.="\ %{''!=#&filetype?&filetype:'none'}\ "
@@ -230,15 +243,12 @@ set pastetoggle=<F11>
 " Relative number lines
 set relativenumber
  
-" Trying to hide tildes
-highlight EndOfBuffer ctermfg=green
-
 " Limit characters of line in Markdown files
 " highlight ColorColumn ctermbg=black
 " au BufRead,BufNewFile *.md setlocal colorcolumn=80
 
 " Spell check
-set spell
+" set spell
 highlight clear SpellBad
 hi SpellBad cterm=underline ctermbg=none ctermfg=LightRed
 hi SpellLocal cterm=underline ctermbg=none ctermfg=LightRed
@@ -262,16 +272,15 @@ set shiftwidth=2
 
 " Set space as character in split separator
 set fillchars+=vert:\ 
-highlight VertSplit ctermfg=black
-"highlight Folded ctermfg=12
+hi VertSplit ctermfg=black
 set splitbelow
 set splitright
 
 " Enable folding
 set foldmethod=manual
 set foldcolumn=1
-highlight Folded ctermbg=NONE
-highlight FoldColumn ctermbg=NONE
+hi Folded ctermbg=NONE
+hi FoldColumn ctermbg=NONE
 let g:markdown_folding = 1
 let g:markdown_enable_folding = 1
 
@@ -286,7 +295,7 @@ endfunction
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()
 au BufEnter *.md setlocal foldmethod=expr
 
-" Folding in js and jsx files
+" Folding js and jsx
 function JsLevel() 
 	let h = matchstr(getline(v:lnum), '// MARK:') 
 	let h2 = matchstr(getline(v:lnum), '// MARK: -') 
@@ -296,14 +305,15 @@ function JsLevel()
 		return ">1"
 	else
 		return ">2"
-	endif 
+	endif
+
 endfunction
 au BufEnter *.js setlocal foldexpr=JsLevel()
 au BufEnter *.js setlocal foldmethod=expr
 au BufEnter *.jsx setlocal foldexpr=JsLevel()
 au BufEnter *.jsx setlocal foldmethod=expr
 
-" Folding in txt files
+" Folding txt
 function! NeatFoldText()
 	setlocal foldmethod=expr
 	setlocal foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
@@ -312,6 +322,9 @@ endfunction
 
 autocmd BufNewFile,BufRead *.txt set foldmethod=indent
 autocmd BufNewFile,BufRead *.txt set foldtext=NeatFoldText()
+
+" Folding CSS
+autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
 
 " Hide duplicate -- INSERT -- warning
 set noshowmode
@@ -344,10 +357,14 @@ autocmd BufNewFile,BufRead *.css set shiftwidth=2
 
 " JSON
 com! Json %!python -m json.tool
+autocmd BufNewFile,BufRead *.json set tabstop=2
+autocmd BufNewFile,BufRead *.json set softtabstop=2
+autocmd BufNewFile,BufRead *.json set shiftwidth=2
 autocmd BufNewFile,BufRead *.json set fdm=syntax        " Change folding rule
 autocmd BufNewFile,BufRead *.json set nospell
 autocmd BufNewFile,BufRead *.json hi constant ctermfg=gray
 autocmd BufNewFile,BufRead *.json hi error ctermbg=none
+autocmd BufNewFile,BufRead *.json colo Base2Tone_HeathDark
 
 " XML
 autocmd BufNewFile,BufRead *.xml set tabstop=2
@@ -363,20 +380,22 @@ hi htmlItalic ctermfg=grey ctermbg=none cterm=none
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
 nmap Y y$
- 
-" Map <C-L> (redraw screen) to also turn off search highlighting until the
-" next search
+
+" Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 nmap < <C-B>																"Page up
 nmap > <C-F>																"Page down
 nmap - <C-B>																"Page up
 nnoremap <space> <C-F>											"Page down
-nmap =j :%!python -m json.tool<CR>
+nmap =j :%!python -c "import json, sys; print json.dumps(json.load(sys.stdin), indent=2)"<CR>
 nmap \f :!ranger<CR>
 map <leader>md :InstantMarkdownPreview<CR>
 cmap W w
 cmap Q q
 map 0 :call LineHome()<CR>
+inoremap ><Tab> ><Esc>F<lyt>o</<C-r>"><Esc>O<Space>
+nmap J <nop>						" Avoid joining lines when hitting caps lock by mistake
+nmap K <nop>						" Avoid opening help when hitting caps lock by mistake
 
 " First character of line or beginning of line
 function! LineHome()
@@ -401,7 +420,7 @@ inoremap " ""<Esc>i
 "autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
 inoremap ) <c-r>=ClosePair(')')<CR>
 inoremap ] <c-r>=ClosePair(']')<CR>
-inoremap } <c-r>=CloseBracket()<CR>
+inoremap } <c-r>=ClosePair('}')<CR>
 inoremap " <c-r>=QuoteDelim('"')<CR>
 inoremap ' <c-r>=QuoteDelim("'")<CR>
 
@@ -413,13 +432,13 @@ function ClosePair(char)
 	endif
 endf
 
-function CloseBracket()
-	if match(getline(line('.') + 1), '\s*}') < 0
-		return "\<CR>}"
-	else
-		return "\<Esc>j0f}a"
-	endif
-endf
+" function CloseBracket()
+" 	if match(getline(line('.') + 1), '\s*}') < 0
+" 		return "\}"
+" 	else
+" 		return "\<Esc>j0f}a"
+" 	endif
+" endf
 
 function QuoteDelim(char)
 	let line = getline('.')
@@ -446,18 +465,20 @@ function QuoteDelim(char)
 	endif
 endf
 
-" Comment line
-map ( I// <Esc>
-map ) ^3x
-
 " Deleting does not replace clipboard
 " nnoremap d "_d
 " vnoremap d "_d
 " nnoremap D "_D
 " vnoremap D "_D
 
-"split navigations
+" Split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Moving multiple lines
+xnoremap [e :m-2<CR>gv=gv         " Move lines up, visual mode
+xnoremap ]e :m'>+<CR>gv=gv        " Move lines down, visual mode
+nnoremap [e :<C-u>m-2<CR>==       " Move lines up, normal mode
+nnoremap ]e :<C-u>m+<CR>==        " Move lines down, normal mode
