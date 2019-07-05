@@ -19,6 +19,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'chemzqm/vim-jsx-improve'
 Plugin 'kballard/vim-swift'
 Plugin 'posva/vim-vue'
+Plugin 'atelierbram/Base2Tone-vim'
+Plugin 'terryma/vim-smooth-scroll'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -134,8 +136,8 @@ endif
 function! Timesheet()
 	call append(line('.'), "")
 	call append(line('.'), "- 22:00 - 00:00 [2:00]")
-	call append(line('.'), "- 15:00 - 18:00 [3:00]")
-	call append(line('.'), "- 10:00 - 13:30 [3:30]")
+	call append(line('.'), "- 13:00 - 17:30 [4:30]")
+	call append(line('.'), "- 09:00 - 12:30 [3:30]")
 	call append(line('.'), "")
 	call append(line('.'), "#### " . strftime("%Y-%m-%d %a"))
 endfunction
@@ -385,8 +387,8 @@ nmap Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 nmap < <C-B>																"Page up
 nmap > <C-F>																"Page down
-nmap - <C-B>																"Page up
-nnoremap <space> <C-F>											"Page down
+nnoremap - :call smooth_scroll#up(&scroll*2, 10, 2)<CR>						"Page up
+nnoremap <space> :call smooth_scroll#down(&scroll*2, 10, 2)<CR>		"Page down
 nmap =j :%!python -c "import json, sys; print json.dumps(json.load(sys.stdin), indent=2)"<CR>
 nmap \f :!ranger<CR>
 map <leader>md :InstantMarkdownPreview<CR>
