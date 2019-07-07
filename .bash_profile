@@ -1,10 +1,10 @@
-export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/mongodb@3.6/bin:$PATH:/.npm-global/bin
+export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/mongodb@3.6/bin:$PATH
 
 # Colors
 export CLICOLOR=1
-export LSCOLORS='gxfxcxdxbxexexaxaxaxex'
+export LSCOLORS='exfxcxdxbxexexaxaxaxex'
 export TERM="xterm-color"
-export PS1='\[\e[0;36m\]\u\[\e[0m\]@\[\e[0;36m\]\h\[\e[0m\]:\[\e[0;36m\]\w\[\e[0m\]\$ '
+export PS1='\[\e[0;34m\]\u\[\e[0m\]@\[\e[0;34m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ '
 
 # Aliases
 alias lsdir='ls -ld -- */'																																			# List folders
@@ -28,11 +28,7 @@ alias usdo='sudo "$@"'																																					# Fat fingers sudo fi
 alias mutt='neomutt'
 alias clock='tty-clock -scC 3'
 alias tree='tree -I node_modules --dirsfirst'
-alias ts='vim -c "set spell" "+normal zajjzajjzOj" ~/Documents/timesheet.md'
-alias vim=/usr/local/bin/vim
-alias vi=/usr/local/bin/vim
-
-export EDITOR=/usr/local/bin/vim
+alias ts='vim -c "set spell" "+normal zajjzajjzOj" ~/iCloud/Documents/timesheet.md'
 
 function up {
     cd `expr "$PWD" : "^\(.*$1[^/]*\)"`
