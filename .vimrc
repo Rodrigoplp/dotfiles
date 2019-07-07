@@ -21,6 +21,7 @@ Plugin 'kballard/vim-swift'
 Plugin 'posva/vim-vue'
 Plugin 'atelierbram/Base2Tone-vim'
 Plugin 'terryma/vim-smooth-scroll'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -156,6 +157,9 @@ hi CursorLineNr ctermbg=none ctermfg=darkblue
 hi Comment ctermfg=blue
 hi Folded ctermfg=blue
 hi EndOfBuffer ctermfg=gray
+
+" YouCompleteMe options
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 " Status bar
 function! InsertStatuslineColor(mode)
