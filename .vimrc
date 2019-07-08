@@ -38,7 +38,10 @@ filetype plugin indent on    " required
 filetype indent plugin on
 set omnifunc=syntaxcomplete#Complete
 set hidden
- 
+
+" Fuzzy finder
+set rtp+=/usr/local/opt/fzf
+
 " Better command-line completion
 set wildmenu
  
