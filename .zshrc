@@ -5,13 +5,13 @@ export ZSH="/Users/rp-office/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="random"
+ZSH_THEME="rpinto"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
 # If set to an empty array, this variable will have no effect.
-ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "miloshadzic" "wezm" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "miloshadzic" "wezm" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -94,7 +94,7 @@ alias changelog='github-changes -o reol -r edge_ios -a --title "Leadkit iOS CHAN
 alias scripts='cd /Users/rodrigopinto/Documents/Development/Scripts'														# Script directory
 alias folder='find . -type f -exec ls -l {} \; | awk '\''{sum += $5} END {print sum}'\'''				# folder size
 alias dev="cd /Users/rodrigopinto/Documents/Development"
-alias home='cd /Users/rodrigopinto/Documents/Office'
+alias home='cd ~/Documents/mfind-backend'
 alias wiki="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/Tnk_Wiki"							# TnK wiki
 alias site="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/KidsOnTube_site"			# TnK site
 alias indie='cd /Users/rodrigopinto/Documents/Office/Entreprise/IndieHackers'
@@ -112,4 +112,6 @@ alias ts='vim -c "set spell" "+normal zajjzajjzOj" ~/iCloud/Documents/timesheet.
 alias vim=/usr/local/bin/vim
 alias vi=/usr/local/bin/vim
 
+# Fuzzy find
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='rg --files --ignore --hidden --follow --glob "!.git/*"'

@@ -22,6 +22,7 @@ Plugin 'posva/vim-vue'
 Plugin 'atelierbram/Base2Tone-vim'
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -41,6 +42,7 @@ set hidden
 
 " Fuzzy finder
 set rtp+=/usr/local/opt/fzf
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " Better command-line completion
 set wildmenu
