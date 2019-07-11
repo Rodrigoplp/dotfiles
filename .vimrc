@@ -496,6 +496,9 @@ xnoremap ]e :m'>+<CR>gv=gv        " Move lines down, visual mode
 nnoremap [e :<C-u>m-2<CR>==       " Move lines up, normal mode
 nnoremap ]e :<C-u>m+<CR>==        " Move lines down, normal mode
 
+" Navigate buffers
+nnoremap gb :ls<CR>:b
+
 " Position search matches in middle of screen
 nnoremap n nzz
 nnoremap N Nzz
