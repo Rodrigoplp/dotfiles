@@ -42,7 +42,7 @@ set hidden
 
 " Fuzzy finder
 set rtp+=/usr/local/opt/fzf
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " Better command-line completion
 set wildmenu
@@ -162,6 +162,7 @@ hi CursorLineNr ctermbg=none ctermfg=darkblue
 hi Comment ctermfg=blue
 hi Folded ctermfg=blue
 hi EndOfBuffer ctermfg=gray
+hi Search cterm=NONE ctermbg=NONE ctermfg=Red
 
 " YouCompleteMe options
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -185,7 +186,7 @@ endfunction
 
 function! ModeName(mode)
 	if a:mode == 'i'
-		return 'Insert'
+		return 'I'
 	elseif a:mode == 'v'
 		hi User1 ctermbg=202 ctermfg=blue
 		hi User2 ctermbg=215 ctermfg=202
@@ -193,7 +194,7 @@ function! ModeName(mode)
 		hi User4 ctermbg=none ctermfg=215
 		hi User5 ctermbg=none ctermfg=202
 		redrawstatus
-		return 'Visual'
+	return 'V'
 	else
 		hi User1 ctermbg=none ctermfg=33
 		hi User2 ctermbg=none ctermfg=33
@@ -201,7 +202,7 @@ function! ModeName(mode)
 		hi User4 ctermbg=none ctermfg=33
 		hi User5 ctermbg=none ctermfg=232
 		redrawstatus
-		return 'Normal'
+		return 'N'
 	endif
 endfunction
 
@@ -218,6 +219,7 @@ function! ActiveStatus()
 	let statusline.="%4*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%5*"
+	let statusline.="\ [%n/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]"
 	let statusline.="\ %.90F\ %m\ "
 	let statusline.="%{&readonly?'\ \ ':''}"
 	let statusline.="%="
@@ -396,8 +398,8 @@ nmap Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 nmap < <C-B>																"Page up
 nmap > <C-F>																"Page down
-nnoremap - :call smooth_scroll#up(&scroll*2, 10, 2)<CR>						"Page up
-nnoremap <space> :call smooth_scroll#down(&scroll*2, 10, 2)<CR>		"Page down
+nnoremap - :call smooth_scroll#up(&scroll*2, 10, 4)<CR>						"Page up
+nnoremap <space> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>		"Page down
 nmap =j :%!python -c "import json, sys; print json.dumps(json.load(sys.stdin), indent=2)"<CR>
 nmap \f :!ranger<CR>
 map <leader>md :InstantMarkdownPreview<CR>
@@ -493,3 +495,7 @@ xnoremap [e :m-2<CR>gv=gv         " Move lines up, visual mode
 xnoremap ]e :m'>+<CR>gv=gv        " Move lines down, visual mode
 nnoremap [e :<C-u>m-2<CR>==       " Move lines up, normal mode
 nnoremap ]e :<C-u>m+<CR>==        " Move lines down, normal mode
+
+" Position search matches in middle of screen
+nnoremap n nzz
+nnoremap N Nzz
