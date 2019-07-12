@@ -120,8 +120,8 @@ set noruler
 " dialogue asking if you wish to save changed files.
 set confirm
  
-" Use visual bell instead of beeping when doing something wrong
-set visualbell
+" Silence both sound and visual bell
+set vb t_vb=
  
 " Enable use of the mouse for all modes
 set mouse=a
@@ -497,7 +497,13 @@ nnoremap [e :<C-u>m-2<CR>==       " Move lines up, normal mode
 nnoremap ]e :<C-u>m+<CR>==        " Move lines down, normal mode
 
 " Navigate buffers
-nnoremap gb :ls<CR>:b
+nnoremap bb :ls<CR>:b							" List buffers and select
+nnoremap bp :bp<CR>								" Previous buffer
+nnoremap bn :bn<CR>								" Next buffer
+
+" Don't quit vim if there is more than one buffer opened
+ca q :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
+ca wq :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'wq'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
 
 " Position search matches in middle of screen
 nnoremap n nzz
