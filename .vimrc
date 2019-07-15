@@ -23,6 +23,7 @@ Plugin 'atelierbram/Base2Tone-vim'
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'junegunn/fzf.vim'
+Plugin 'w0rp/ale'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -46,6 +47,9 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 
 " Better command-line completion
 set wildmenu
+
+" Ale fixers
+let g:ale_fixers = ['prettier', 'eslint']
  
 " Show partial commands in the last line of the screen
 set showcmd
@@ -342,6 +346,8 @@ autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldma
 " Hide duplicate -- INSERT -- warning
 set noshowmode
 
+autocmd BufNewFile,BufRead *.* set expandtab
+
 " Language dependent configurations
 
 " Python
@@ -349,7 +355,7 @@ autocmd BufNewFile,BufRead *.py set tabstop=4
 autocmd BufNewFile,BufRead *.py set softtabstop=4
 autocmd BufNewFile,BufRead *.py set shiftwidth=4
 autocmd BufNewFile,BufRead *.py set textwidth=139
-autocmd BufNewFile,BufRead *.py set expandtab
+" autocmd BufNewFile,BufRead *.py set expandtab
 autocmd BufNewFile,BufRead *.py set autoindent
 autocmd BufNewFile,BufRead *.py set fileformat=unix
 
@@ -357,6 +363,7 @@ autocmd BufNewFile,BufRead *.py set fileformat=unix
 autocmd BufNewFile,BufRead *.js set tabstop=2
 autocmd BufNewFile,BufRead *.js set softtabstop=2
 autocmd BufNewFile,BufRead *.js set shiftwidth=2
+" autocmd BufNewFile,BufRead *.js set expandtab
 
 autocmd BufNewFile,BufRead *.html set tabstop=2
 autocmd BufNewFile,BufRead *.html set softtabstop=2
@@ -488,6 +495,7 @@ nnoremap <Leader>bn :bn<CR>								" Next buffer
 
 " Don't quit vim if there is more than one buffer opened
 ca q :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
+ca q! :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q!'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
 ca wq :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'wq'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
 
 " Position search matches in middle of screen
