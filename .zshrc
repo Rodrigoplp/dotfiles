@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/rp-office/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -94,7 +94,7 @@ alias changelog='github-changes -o reol -r edge_ios -a --title "Leadkit iOS CHAN
 alias scripts='cd /Users/rodrigopinto/Documents/Development/Scripts'														# Script directory
 alias folder='find . -type f -exec ls -l {} \; | awk '\''{sum += $5} END {print sum}'\'''				# folder size
 alias dev="cd /Users/rodrigopinto/Documents/Development"
-alias home='cd ~/Documents/mfind-backend'
+alias home='cd ~/Documents/Office'
 alias wiki="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/Tnk_Wiki"							# TnK wiki
 alias site="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/KidsOnTube_site"			# TnK site
 alias indie='cd /Users/rodrigopinto/Documents/Office/Entreprise/IndieHackers'
@@ -114,4 +114,4 @@ alias vi=/usr/local/bin/vim
 
 # Fuzzy find
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files --ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --ignore --hidden --follow --glob "!{.git,node_modules}/*"'

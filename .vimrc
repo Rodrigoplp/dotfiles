@@ -42,7 +42,7 @@ set hidden
 
 " Fuzzy finder
 set rtp+=/usr/local/opt/fzf
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --ignore --hidden --follow --glob "!{.git,node_modules}/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " Better command-line completion
 set wildmenu
@@ -377,7 +377,6 @@ autocmd BufNewFile,BufRead *.json set fdm=syntax        " Change folding rule
 autocmd BufNewFile,BufRead *.json set nospell
 autocmd BufNewFile,BufRead *.json hi constant ctermfg=gray
 autocmd BufNewFile,BufRead *.json hi error ctermbg=none
-autocmd BufNewFile,BufRead *.json colo Base2Tone_HeathDark
 
 " XML
 autocmd BufNewFile,BufRead *.xml set tabstop=2
@@ -445,14 +444,6 @@ function ClosePair(char)
 	endif
 endf
 
-" function CloseBracket()
-" 	if match(getline(line('.') + 1), '\s*}') < 0
-" 		return "\}"
-" 	else
-" 		return "\<Esc>j0f}a"
-" 	endif
-" endf
-
 function QuoteDelim(char)
 	let line = getline('.')
 	let col = col('.')
@@ -478,12 +469,6 @@ function QuoteDelim(char)
 	endif
 endf
 
-" Deleting does not replace clipboard
-" nnoremap d "_d
-" vnoremap d "_d
-" nnoremap D "_D
-" vnoremap D "_D
-
 " Split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -497,9 +482,9 @@ nnoremap [e :<C-u>m-2<CR>==       " Move lines up, normal mode
 nnoremap ]e :<C-u>m+<CR>==        " Move lines down, normal mode
 
 " Navigate buffers
-nnoremap bb :ls<CR>:b							" List buffers and select
-nnoremap bp :bp<CR>								" Previous buffer
-nnoremap bn :bn<CR>								" Next buffer
+nnoremap <Leader>bb :ls<CR>:b
+nnoremap <Leader>bp :bp<CR>								" Previous buffer
+nnoremap <Leader>bn :bn<CR>								" Next buffer
 
 " Don't quit vim if there is more than one buffer opened
 ca q :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
