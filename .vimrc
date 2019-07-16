@@ -50,6 +50,10 @@ set wildmenu
 
 " Ale fixers
 let g:ale_fixers = ['prettier', 'eslint']
+let g:ale_javascript_eslint_options = "--rule 'semi: off'"
+let g:ale_javascript_prettier_options = '--no-semi'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
  
 " Show partial commands in the last line of the screen
 set showcmd
@@ -167,6 +171,8 @@ hi Comment ctermfg=blue
 hi Folded ctermfg=blue
 hi EndOfBuffer ctermfg=gray
 hi Search cterm=NONE ctermbg=NONE ctermfg=Red
+hi ALEErrorSign ctermbg=NONE ctermfg=blue
+hi ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 " YouCompleteMe options
 let g:ycm_autoclose_preview_window_after_completion = 1
