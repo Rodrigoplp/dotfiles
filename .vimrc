@@ -50,8 +50,6 @@ set wildmenu
 
 " Ale fixers
 let g:ale_fixers = ['prettier', 'eslint']
-let g:ale_javascript_eslint_options = "--rule 'semi: off'"
-let g:ale_javascript_prettier_options = '--no-semi'
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
  
@@ -164,6 +162,7 @@ syntax on
 set t_Co=256
 set background=light
 colorscheme Base2Tone_ForestDark
+hi Normal ctermbg=NONE
 hi LineNr ctermfg=grey
 hi CursorLine ctermbg=none
 hi CursorLineNr ctermbg=none ctermfg=darkblue
@@ -171,7 +170,7 @@ hi Comment ctermfg=blue
 hi Folded ctermfg=blue
 hi EndOfBuffer ctermfg=gray
 hi Search cterm=NONE ctermbg=NONE ctermfg=Red
-hi ALEErrorSign ctermbg=NONE ctermfg=blue
+hi ALEErrorSign ctermbg=NONE ctermfg=Red
 hi ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 " YouCompleteMe options
@@ -190,7 +189,7 @@ function! InsertStatuslineColor(mode)
 	elseif a:mode == 'v'
 		hi User5 ctermbg=none ctermfg=240
 	else
-		hi User5 ctermbg=red ctermfg=240
+		hi User5 ctermbg=Red ctermfg=240
 	endif
 endfunction
 
@@ -448,6 +447,7 @@ inoremap ] <c-r>=ClosePair(']')<CR>
 inoremap } <c-r>=ClosePair('}')<CR>
 inoremap " <c-r>=QuoteDelim('"')<CR>
 inoremap ' <c-r>=QuoteDelim("'")<CR>
+nnoremap <C-]> :ALEFix<CR>
 
 function ClosePair(char)
 	if getline('.')[col('.') - 1] == a:char
@@ -501,7 +501,6 @@ nnoremap <Leader>bn :bn<CR>								" Next buffer
 
 " Don't quit vim if there is more than one buffer opened
 ca q :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
-ca q! :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q!'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
 ca wq :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'wq'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
 
 " Position search matches in middle of screen
