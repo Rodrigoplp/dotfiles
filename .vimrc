@@ -382,6 +382,7 @@ autocmd BufNewFile,BufRead *.css set shiftwidth=2
 
 " JSON
 com! Json %!python -m json.tool
+let g:vim_json_syntax_conceal = 0
 autocmd BufNewFile,BufRead *.json set tabstop=2
 autocmd BufNewFile,BufRead *.json set softtabstop=2
 autocmd BufNewFile,BufRead *.json set shiftwidth=2
