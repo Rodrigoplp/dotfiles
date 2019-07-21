@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="~/.oh-my-zsh"
+export ZSH="/Users/rodrigopinto/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -97,7 +97,6 @@ alias dev="cd /Users/rodrigopinto/Documents/Development"
 alias home='cd ~/Documents/Office'
 alias wiki="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/Tnk_Wiki"							# TnK wiki
 alias site="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/KidsOnTube_site"			# TnK site
-alias indie='cd /Users/rodrigopinto/Documents/Office/Entreprise/IndieHackers'
 alias joinpdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py --output all.pdf *.pdf"	# join PDFs into one file
 alias hour='say it is now `date "+%H:%M"`'
 alias up1='cd ..;lsdir'																																					# up one dir
@@ -111,6 +110,10 @@ alias tree='tree -I node_modules --dirsfirst'
 alias ts='vim -c "set spell" "+normal zajjzajjzOj" ~/iCloud/Documents/timesheet.md'
 alias vim=/usr/local/bin/vim
 alias vi=/usr/local/bin/vim
+
+function up {
+    cd `expr "$PWD" : "^\(.*$1[^/]*\)"`
+}
 
 # Fuzzy find
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
