@@ -106,7 +106,7 @@ alias ranger='ranger --choosedir=$HOME/rangerdir; LASTDIR=`cat $HOME/rangerdir`;
 alias usdo='sudo "$@"'																																					# Fat fingers sudo fix
 alias mutt='neomutt'
 alias clock='tty-clock -scC 3'
-alias tree='tree -I node_modules --dirsfirst'
+alias tree='tree -C -I node_modules --dirsfirst'
 alias ts='vim -c "set spell" "+normal zajjzajjzOj" ~/iCloud/Documents/timesheet.md'
 alias vim=/usr/local/bin/vim
 alias vi=/usr/local/bin/vim
