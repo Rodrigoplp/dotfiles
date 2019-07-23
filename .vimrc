@@ -386,10 +386,14 @@ let g:vim_json_syntax_conceal = 0
 autocmd BufNewFile,BufRead *.json set tabstop=2
 autocmd BufNewFile,BufRead *.json set softtabstop=2
 autocmd BufNewFile,BufRead *.json set shiftwidth=2
-autocmd BufNewFile,BufRead *.json set fdm=syntax        " Change folding rule
+" autocmd BufNewFile,BufRead *.json set fdm=syntax        " Change folding rule
 autocmd BufNewFile,BufRead *.json set nospell
 autocmd BufNewFile,BufRead *.json hi constant ctermfg=gray
 autocmd BufNewFile,BufRead *.json hi error ctermbg=none
+autocmd BufNewFile,BufRead *.json hi Label ctermfg=black
+autocmd BufNewFile,BufRead *.json hi jsonString ctermfg=blue
+autocmd BufNewFile,BufRead *.json hi jsonNumber ctermfg=magenta
+autocmd BufNewFile,BufRead *.json hi jsonBoolean ctermfg=blue
 
 " XML
 autocmd BufNewFile,BufRead *.xml set tabstop=2
@@ -501,8 +505,8 @@ nnoremap <Leader>bp :bp<CR>								" Previous buffer
 nnoremap <Leader>bn :bn<CR>								" Next buffer
 
 " Don't quit vim if there is more than one buffer opened
-ca q :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
-ca wq :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'wq'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
+" ca q :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
+" ca wq :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'wq'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
 
 " Position search matches in middle of screen
 nnoremap n nzz

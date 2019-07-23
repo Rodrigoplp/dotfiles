@@ -60,37 +60,14 @@ folder-hook YahooBR/* source ~/.mutt/accounts/yahoobr.muttrc
 folder-hook Gmail/* source ~/.mutt/accounts/gmail.muttrc
 macro index , "<enter-command>source ~/.mutt/accounts/gmail.muttrc<enter>"
 
-macro index <f4> '<sync-mailbox><enter-command>\
-    source ~/.mutt/accounts/yahoo.muttrc\
-    <enter><change-folder>!<enter>'
-macro index <f5> '<sync-mailbox><enter-command>\
-    source ~/.mutt/accounts/gmail.muttrc\
-    <enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command> source ~/.mutt/accounts/yahoo.muttrc\ <enter><change-folder>!<enter>'
+macro index <f5> '<sync-mailbox><enter-command> source ~/.mutt/accounts/yahoobr.muttrc\ <enter><change-folder>!<enter>'
+macro index <f6> '<sync-mailbox><enter-command> source ~/.mutt/accounts/gmail.muttrc\ <enter><change-folder>!<enter>'
 
 # Yahoo
 set sidebar_sort_method		= name
 set editor								= 'vim + -c "set textwidth=100" -c "set wrap"'
 set charset								= iso-8859-1
-
-# # Default inbox.
-# set spoolfile = "+steve-stevelosh.com/INBOX"
-# 
-# # Alternate email addresses.
-# alternates sjl@pculture.org still\.?life@gmail.com steve@ladyluckblues.com steve@pculture.org
-# 
-# # Mailboxes to show in the sidebar.
-# mailboxes +steve-stevelosh.com/INBOX \
-# 						+steve-stevelosh.com/vim \
-# 						+steve-stevelosh.com/clojure \
-# 						+steve-stevelosh.com/python \
-# 						+steve-stevelosh.com/mercurial \
-# 						+steve-stevelosh.com/archive \
-# 						+steve-stevelosh.com/sent \
-# 						+steve-stevelosh.com/drafts \
-# 
-# # Other special folders.
-# set mbox      = "+steve-stevelosh.com/archive"
-# set postponed = "+steve-stevelosh.com/drafts"
 
 # Language settings ----------------------------------
 # set allow_8bit
