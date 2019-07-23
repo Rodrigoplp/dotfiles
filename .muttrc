@@ -60,6 +60,13 @@ folder-hook YahooBR/* source ~/.mutt/accounts/yahoobr.muttrc
 folder-hook Gmail/* source ~/.mutt/accounts/gmail.muttrc
 macro index , "<enter-command>source ~/.mutt/accounts/gmail.muttrc<enter>"
 
+macro index <f4> '<sync-mailbox><enter-command>\
+    source ~/.mutt/accounts/yahoo.muttrc\
+    <enter><change-folder>!<enter>'
+macro index <f5> '<sync-mailbox><enter-command>\
+    source ~/.mutt/accounts/gmail.muttrc\
+    <enter><change-folder>!<enter>'
+
 # Yahoo
 set sidebar_sort_method		= name
 set editor								= 'vim + -c "set textwidth=100" -c "set wrap"'
