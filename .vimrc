@@ -52,7 +52,7 @@ set wildmenu
 let g:ale_fixers = ['prettier', 'eslint']
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
- 
+
 " Show partial commands in the last line of the screen
 set showcmd
 
@@ -306,7 +306,8 @@ hi FoldColumn ctermbg=NONE
 let g:markdown_folding = 1
 let g:markdown_enable_folding = 1
 
-function MarkdownLevel() 
+" Folding markdown
+function MarkdownFold() 
 	let h = matchstr(getline(v:lnum), '^#\+') 
 	if empty(h) 
 		return "=" 
@@ -314,11 +315,11 @@ function MarkdownLevel()
 		return ">" . len(h) 
 	endif 
 endfunction
-au BufEnter *.md setlocal foldexpr=MarkdownLevel()
+au BufEnter *.md setlocal foldexpr=MarkdownFold()
 au BufEnter *.md setlocal foldmethod=expr
 
 " Folding js and jsx
-function JsLevel() 
+function JsFold() 
 	let h = matchstr(getline(v:lnum), '// MARK:') 
 	let h2 = matchstr(getline(v:lnum), '// MARK: -') 
 	if empty(h) 
@@ -328,12 +329,24 @@ function JsLevel()
 	else
 		return ">2"
 	endif
-
 endfunction
-au BufEnter *.js setlocal foldexpr=JsLevel()
+au BufEnter *.js setlocal foldexpr=JsFold()
 au BufEnter *.js setlocal foldmethod=expr
-au BufEnter *.jsx setlocal foldexpr=JsLevel()
+au BufEnter *.jsx setlocal foldexpr=JsFold()
 au BufEnter *.jsx setlocal foldmethod=expr
+
+" Folding test.js
+function TestsFold()
+  let h1 = matchstr(getline(v:lnum), 'it(')
+  let h2 = matchstr(getline(v:lnum), 'it.only(')
+  if empty(h1) && empty(h2)
+    return "="
+  else
+    return ">1"
+  endif
+endfunction
+au BufEnter *.test.js setlocal foldexpr=TestsFold()
+au BufEnter *.test.js setlocal foldmethod=expr
 
 " Folding txt
 function! NeatFoldText()
@@ -505,8 +518,8 @@ nnoremap <Leader>bp :bp<CR>								" Previous buffer
 nnoremap <Leader>bn :bn<CR>								" Next buffer
 
 " Don't quit vim if there is more than one buffer opened
-" ca q :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
-" ca wq :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'wq'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
+ca q :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
+ca wq :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'wq'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
 
 " Position search matches in middle of screen
 nnoremap n nzz
