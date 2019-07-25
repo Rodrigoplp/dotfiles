@@ -171,7 +171,8 @@ hi Folded ctermfg=blue
 hi EndOfBuffer ctermfg=gray
 hi Search cterm=NONE ctermbg=NONE ctermfg=Red
 hi ALEErrorSign ctermbg=NONE ctermfg=Red
-hi ALEWarningSign ctermbg=NONE ctermfg=yellow
+hi ALEWarningSign ctermbg=NONE ctermfg=190
+hi SignColumn ctermbg=NONE
 
 " YouCompleteMe options
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -518,8 +519,8 @@ nnoremap <Leader>bp :bp<CR>								" Previous buffer
 nnoremap <Leader>bn :bn<CR>								" Next buffer
 
 " Don't quit vim if there is more than one buffer opened
-ca q :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
-ca wq :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'wq'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
+" ca q :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
+" ca wq :if ((len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1))<Bar>exe 'wq'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
 
 " Position search matches in middle of screen
 nnoremap n nzz
