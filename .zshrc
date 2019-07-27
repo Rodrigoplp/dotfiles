@@ -1,4 +1,4 @@
-export ZSH="/Users/rp-office/.oh-my-zsh"
+export ZSH="/Users/rodrigopinto/.oh-my-zsh"
 
 ZSH_THEME="rpinto"
 zle_highlight+=(paste:none)
@@ -18,7 +18,7 @@ alias changelog='github-changes -o reol -r edge_ios -a --title "Leadkit iOS CHAN
 alias scripts='cd /Users/rodrigopinto/Documents/Development/Scripts'														# Script directory
 alias folder='find . -type f -exec ls -l {} \; | awk '\''{sum += $5} END {print sum}'\'''				# folder size
 alias dev="cd /Users/rodrigopinto/Documents/Development"
-alias home='cd ~/Documents/mfind-backend'
+alias home='cd ~/Documents/Projects/mfind-backend'
 alias wiki="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/Tnk_Wiki"							# TnK wiki
 alias site="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/KidsOnTube_site"			# TnK site
 alias joinpdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py --output all.pdf *.pdf"	# join PDFs into one file
@@ -34,6 +34,7 @@ alias tree='tree -C -I node_modules --dirsfirst'
 alias ts='vim -c "set spell" "+normal zajjzajjzOj" ~/iCloud/Documents/timesheet.md'
 alias vim=/usr/local/bin/vim
 alias vi=/usr/local/bin/vim
+alias vimdiff=/usr/local/bin/vimdiff
 
 function up {
     cd `expr "$PWD" : "^\(.*$1[^/]*\)"`
@@ -42,3 +43,6 @@ function up {
 # Fuzzy find
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --ignore --hidden --follow --glob "!{.git,node_modules}/*"'
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

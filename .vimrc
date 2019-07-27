@@ -24,6 +24,7 @@ Plugin 'terryma/vim-smooth-scroll'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'junegunn/fzf.vim'
 Plugin 'w0rp/ale'
+Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 
 call vundle#end()            " required
 filetype plugin indent on    " required
