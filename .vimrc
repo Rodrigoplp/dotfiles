@@ -163,17 +163,17 @@ syntax on
 set t_Co=256
 set background=light
 colorscheme Base2Tone_ForestDark
-hi Normal ctermbg=NONE
-hi LineNr ctermfg=grey
+hi Normal ctermbg=none
+hi LineNr ctermfg=grey ctermbg=none
 hi CursorLine ctermbg=none
 hi CursorLineNr ctermbg=none ctermfg=darkblue
 hi Comment ctermfg=blue
 hi Folded ctermfg=blue
 hi EndOfBuffer ctermfg=gray
-hi Search cterm=NONE ctermbg=NONE ctermfg=Red
-hi ALEErrorSign ctermbg=NONE ctermfg=Red
-hi ALEWarningSign ctermbg=NONE ctermfg=190
-hi SignColumn ctermbg=NONE
+hi Search cterm=none ctermbg=none ctermfg=Red
+hi ALEErrorSign ctermbg=none ctermfg=Red
+hi ALEWarningSign ctermbg=none ctermfg=190
+hi SignColumn ctermbg=none
 
 " YouCompleteMe options
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -298,8 +298,8 @@ set splitright
 " Enable folding
 set foldmethod=manual
 set foldcolumn=1
-hi Folded ctermbg=NONE
-hi FoldColumn ctermbg=NONE
+hi Folded ctermbg=none
+hi FoldColumn ctermbg=none
 let g:markdown_folding = 1
 let g:markdown_enable_folding = 1
 
