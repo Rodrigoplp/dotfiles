@@ -267,12 +267,7 @@ set pastetoggle=<F11>
 " Relative number lines
 set relativenumber
  
-" Limit characters of line in Markdown files
-" highlight ColorColumn ctermbg=black
-" au BufRead,BufNewFile *.md setlocal colorcolumn=80
-
 " Spell check
-" set spell
 highlight clear SpellBad
 hi SpellBad cterm=underline ctermbg=none ctermfg=LightRed
 hi SpellLocal cterm=underline ctermbg=none ctermfg=LightRed
@@ -417,6 +412,7 @@ autocmd BufNewFile,BufRead *.xml set shiftwidth=2
 
 " Markdown
 hi htmlItalic ctermfg=grey ctermbg=none cterm=none
+autocmd BufNewFile,BufRead *.md set noexpandtab
 
 "------------------------------------------------------------
 " Mappings
