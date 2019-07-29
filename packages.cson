@@ -13,7 +13,6 @@ packages: [
   "git-time-machine"
   "history-tracker"
   "language-markdown"
-  "language-r"
   "linter"
 	"maximize-panes"
   "minimap"

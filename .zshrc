@@ -3,7 +3,10 @@ export ZSH="/Users/rodrigopinto/.oh-my-zsh"
 ZSH_THEME="rpinto"
 zle_highlight+=(paste:none)
 COMPLETION_WAITING_DOTS="true"
-plugins=(git)
+plugins=(
+  git
+  zsh-nvm
+)
 source $ZSH/oh-my-zsh.sh
 export EDITOR=/usr/local/bin/vim
 export VISUAL=/usr/local/bin/vim
