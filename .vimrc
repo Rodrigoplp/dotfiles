@@ -370,7 +370,6 @@ autocmd BufNewFile,BufRead *.py set tabstop=4
 autocmd BufNewFile,BufRead *.py set softtabstop=4
 autocmd BufNewFile,BufRead *.py set shiftwidth=4
 autocmd BufNewFile,BufRead *.py set textwidth=139
-" autocmd BufNewFile,BufRead *.py set expandtab
 autocmd BufNewFile,BufRead *.py set autoindent
 autocmd BufNewFile,BufRead *.py set fileformat=unix
 
@@ -378,7 +377,6 @@ autocmd BufNewFile,BufRead *.py set fileformat=unix
 autocmd BufNewFile,BufRead *.js set tabstop=2
 autocmd BufNewFile,BufRead *.js set softtabstop=2
 autocmd BufNewFile,BufRead *.js set shiftwidth=2
-" autocmd BufNewFile,BufRead *.js set expandtab
 
 autocmd BufNewFile,BufRead *.html set tabstop=2
 autocmd BufNewFile,BufRead *.html set softtabstop=2
@@ -396,7 +394,6 @@ let g:vim_json_syntax_conceal = 0
 autocmd BufNewFile,BufRead *.json set tabstop=2
 autocmd BufNewFile,BufRead *.json set softtabstop=2
 autocmd BufNewFile,BufRead *.json set shiftwidth=2
-" autocmd BufNewFile,BufRead *.json set fdm=syntax        " Change folding rule
 autocmd BufNewFile,BufRead *.json set nospell
 autocmd BufNewFile,BufRead *.json hi constant ctermfg=gray
 autocmd BufNewFile,BufRead *.json hi error ctermbg=none
@@ -404,6 +401,14 @@ autocmd BufNewFile,BufRead *.json hi Label ctermfg=black
 autocmd BufNewFile,BufRead *.json hi jsonString ctermfg=blue
 autocmd BufNewFile,BufRead *.json hi jsonNumber ctermfg=magenta
 autocmd BufNewFile,BufRead *.json hi jsonBoolean ctermfg=blue
+autocmd BufNewFile,BufRead *.json :call FoldChoice()
+
+function FoldChoice()
+  let choice=confirm("Apply syntax folding rules? (May impact performance on large files)", "&Yes\n&No", 2)
+  if choice == 1
+    set fdm=syntax
+  endif
+endfunction
 
 " XML
 autocmd BufNewFile,BufRead *.xml set tabstop=2
