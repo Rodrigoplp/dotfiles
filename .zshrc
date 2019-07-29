@@ -10,7 +10,8 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 export EDITOR=/usr/local/bin/vim
 export VISUAL=/usr/local/bin/vim
-export PAGER='less'
+export PAGER='less -MR'
+export LESS='MR'
 export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/mongodb@3.6/bin:$PATH
 
 # Aliases
@@ -35,6 +36,8 @@ alias mutt='neomutt'
 alias clock='tty-clock -scC 3'
 alias tree='tree -C -I node_modules --dirsfirst'
 alias ts='vim -c "set spell" "+normal zajjzajjzOj" ~/iCloud/Documents/timesheet.md'
+alias aldo='vim ~/iCloud/Documents/Aldo/aldo.md'
+alias setup='vim ~/iCloud/Scripts/setup_new_mac.md'
 alias vim=/usr/local/bin/vim
 alias vi=/usr/local/bin/vim
 alias vimdiff=/usr/local/bin/vimdiff
