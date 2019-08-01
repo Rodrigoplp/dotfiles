@@ -25,6 +25,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'junegunn/fzf.vim'
 Plugin 'w0rp/ale'
 Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
+Plugin 'mhinz/vim-startify'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -44,7 +45,13 @@ set hidden
 
 " Fuzzy finder
 set rtp+=/usr/local/opt/fzf
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --ignore --hidden --follow --glob "!{.git,node_modules}/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+command! -bang -nargs=* Find
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --ignore --hidden --follow --glob "!{.git,node_modules}/*" --color "always" '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 " Better command-line completion
 set wildmenu
@@ -401,7 +408,7 @@ autocmd BufNewFile,BufRead *.json hi Label ctermfg=black
 autocmd BufNewFile,BufRead *.json hi jsonString ctermfg=blue
 autocmd BufNewFile,BufRead *.json hi jsonNumber ctermfg=magenta
 autocmd BufNewFile,BufRead *.json hi jsonBoolean ctermfg=blue
-autocmd BufNewFile,BufRead *.json :call FoldChoice()
+autocmd BufRead *.json :call FoldChoice()
 
 function FoldChoice()
   let choice=confirm("Apply syntax folding rules? (May impact performance on large files)", "&Yes\n&No", 2)
