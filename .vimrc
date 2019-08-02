@@ -233,19 +233,19 @@ function! ActiveStatus()
 	let statusline.="%2*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%3*"
-	let statusline.="\ %{fugitive#head()!=''?'\ '.fugitive#head().'\ ':'\ [not versd]\ '}"
+	let statusline.="\ %{fugitive#head()!=''?'\ '.fugitive#head().'\ ':'\ -\ '}"
 	let statusline.="%4*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%5*"
 	let statusline.="\ [%n/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]"
-	let statusline.="\ %.90F\ %m\ "
+	let statusline.="\ %.t\ %m\ "
 	let statusline.="%{&readonly?'\ \ ':''}"
 	let statusline.="%="
 	let statusline.="\ %{''!=#&filetype?&filetype:'none'}\ "
 	let statusline.="%4*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%3*"
-	let statusline.="\ %{&ff=='mac'?'CR':&ff=='unix'?'LF':'CRLF'} %vC|%l/%LL\ %p%%\ "            " Column number | Row number / total lines
+	let statusline.="\ %{&ff=='mac'?'CR':&ff=='unix'?'LF':'CRLF'} %vC|%l/%LL\ "            " Column number | Row number / total lines
 	let statusline.="%2*"
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%1*"
@@ -408,11 +408,12 @@ autocmd BufNewFile,BufRead *.json hi Label ctermfg=black
 autocmd BufNewFile,BufRead *.json hi jsonString ctermfg=blue
 autocmd BufNewFile,BufRead *.json hi jsonNumber ctermfg=magenta
 autocmd BufNewFile,BufRead *.json hi jsonBoolean ctermfg=blue
+autocmd BufNewFile *.json set fdm=syntax
 autocmd BufRead *.json :call FoldChoice()
 
 function FoldChoice()
-  let choice=confirm("Apply syntax folding rules? (May impact performance on large files)", "&Yes\n&No", 2)
-  if choice == 1
+  let choice=confirm("Disable syntax folding rules? (May impact performance on large files)", "&Yes\n&No", 2)
+  if choice == 2
     set fdm=syntax
   endif
 endfunction
