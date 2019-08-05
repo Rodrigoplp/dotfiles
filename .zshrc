@@ -21,9 +21,10 @@ alias lsf='ls -lahp | grep -v /'																																# list only file
 alias changelog='github-changes -o reol -r edge_ios -a --title "Leadkit iOS CHANGELOG"'					# REOL build
 alias scripts='cd /Users/rodrigopinto/Documents/Development/Scripts'														# Script directory
 alias folder='find . -type f -exec ls -l {} \; | awk '\''{sum += $5} END {print sum}'\'''				# folder size
-alias dev="cd /Users/rodrigopinto/Documents/Development"
-alias home='cd ~/Documents/Projects/mfind-backend'
-alias wiki="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/Tnk_Wiki"							# TnK wiki
+alias dev="cd /Users/rodrigopinto/Documents/Dev"
+alias mfind='cd ~/Documents/Projects/mfind-backend'
+alias home='cd ~/Documents'
+alias wiki="cd /Users/rodrigopinto/Documents/Dev/tubenkids_wiki"
 alias site="cd /Users/rodrigopinto/Documents/Development/iPhone\ projects/KidsOnTube_site"			# TnK site
 alias joinpdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py --output all.pdf *.pdf"	# join PDFs into one file
 alias hour='say it is now `date "+%H:%M"`'
@@ -48,7 +49,7 @@ function up {
 
 # Fuzzy find
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files --ignore --hidden --follow --glob "!{.git,node_modules}/*"'
+export FZF_DEFAULT_COMMAND='rg --files --ignore-case --hidden --follow --glob "!{.git,node_modules}/*"'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

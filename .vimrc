@@ -341,12 +341,18 @@ au BufEnter *.jsx setlocal foldmethod=expr
 
 " Folding test.js
 function TestsFold()
-  let h1 = matchstr(getline(v:lnum), 'it(')
-  let h2 = matchstr(getline(v:lnum), 'it.only(')
-  if empty(h1) && empty(h2)
-    return "="
-  else
+  let h1 = matchstr(getline(v:lnum), 'describe(')
+  let h2 = matchstr(getline(v:lnum), 'describe.only(')
+  let h3 = matchstr(getline(v:lnum), 'it(')
+  let h4 = matchstr(getline(v:lnum), 'it.only(')
+  if !empty(h1) || !empty(h2)
+    return "0"
+  endif
+  if !empty(h3) || !empty(h4)
     return ">1"
+  endif
+  if empty(h1) && empty(h2) && empty(h3) && empty(h4)
+    return "="
   endif
 endfunction
 au BufEnter *.test.js setlocal foldexpr=TestsFold()
