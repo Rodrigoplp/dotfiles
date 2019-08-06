@@ -13,6 +13,7 @@ export VISUAL=/usr/local/bin/vim
 export PAGER='less -MR'
 export LESS='MR'
 export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/mongodb@3.6/bin:$PATH
+export RIPGREP_CONFIG_PATH=$HOME/.rgrc
 
 # Aliases
 alias lsdir='ls -ld -- */'																																			# List folders
@@ -53,3 +54,6 @@ export FZF_DEFAULT_COMMAND='rg --files --ignore-case --hidden --follow --glob "!
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
