@@ -180,10 +180,14 @@ hi EndOfBuffer ctermfg=gray
 hi Search cterm=none ctermbg=none ctermfg=Red
 hi ALEErrorSign ctermbg=none ctermfg=Red
 hi ALEWarningSign ctermbg=none ctermfg=190
+hi ALEError ctermbg=none cterm=underline
+hi ALEWarning ctermbg=none cterm=underline
 hi SignColumn ctermbg=none
 
 " YouCompleteMe options
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_filetype_blacklist = { 'notes': 1, 'markdown': 1, 'text': 1, 'vimwiki': 1,
+      \ 'pandoc': 1, 'infolog': 1, 'mail': 1 }
 
 " Status bar
 function! InsertStatuslineColor(mode)
@@ -431,6 +435,7 @@ autocmd BufNewFile,BufRead *.xml set shiftwidth=2
 
 " Markdown
 hi htmlItalic ctermfg=grey ctermbg=none cterm=none
+hi markdownError ctermbg=none
 autocmd BufNewFile,BufRead *.md set noexpandtab
 
 "------------------------------------------------------------
@@ -455,6 +460,9 @@ map 0 :call LineHome()<CR>
 inoremap ><Tab> ><Esc>F<lyt>o</<C-r>"><Esc>O<Space>
 nmap J <nop>						" Avoid joining lines when hitting caps lock by mistake
 nmap K <nop>						" Avoid opening help when hitting caps lock by mistake
+
+" Identify rule causing highlight
+map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
 " First character of line or beginning of line
 function! LineHome()
