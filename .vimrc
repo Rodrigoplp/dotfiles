@@ -349,13 +349,14 @@ function TestsFold()
   let h2 = matchstr(getline(v:lnum), 'describe.only(')
   let h3 = matchstr(getline(v:lnum), 'it(')
   let h4 = matchstr(getline(v:lnum), 'it.only(')
+  let h5 = matchstr(getline(v:lnum), 'it.skip(')
   if !empty(h1) || !empty(h2)
-    return "0"
-  endif
-  if !empty(h3) || !empty(h4)
     return ">1"
   endif
-  if empty(h1) && empty(h2) && empty(h3) && empty(h4)
+  if !empty(h3) || !empty(h4) || !empty(h5)
+    return ">2"
+  endif
+  if empty(h1) && empty(h2) && empty(h3) && empty(h4) && empty(h5)
     return "="
   endif
 endfunction
@@ -422,7 +423,7 @@ autocmd BufNewFile *.json set fdm=syntax
 autocmd BufRead *.json :call FoldChoice()
 
 function FoldChoice()
-  let choice=confirm("Disable syntax folding rules? (May impact performance on large files)", "&Yes\n&No", 2)
+  let choice=confirm("Disable syntax folding rules? (May impact performance on large files. To disable rules after the file is opened use 'zi').", "&Disable rules\n&No (default)", 2)
   if choice == 2
     set fdm=syntax
   endif
@@ -523,6 +524,12 @@ function QuoteDelim(char)
 	else
 		return a:char
 	endif
+endf
+
+" Copy path to clipboard
+function Path()
+  let @+=expand("%:p")
+  echo('Path copied to clipboard')
 endf
 
 " Split navigations
