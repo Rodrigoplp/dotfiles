@@ -60,6 +60,10 @@ set wildmenu
 let g:ale_fixers = ['prettier', 'eslint']
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
+let g:ale_pattern_options = {
+\   '.*\.json$': {'ale_enabled': 0},
+\   '.*\.md$': {'ale_enabled': 0},
+\}
 
 " Show partial commands in the last line of the screen
 set showcmd
@@ -186,8 +190,7 @@ hi SignColumn ctermbg=none
 
 " YouCompleteMe options
 let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_filetype_blacklist = { 'notes': 1, 'markdown': 1, 'text': 1, 'vimwiki': 1,
-      \ 'pandoc': 1, 'infolog': 1, 'mail': 1 }
+let g:ycm_filetype_blacklist = { 'notes': 1, 'markdown': 1, 'md': 1, 'text': 1, 'vimwiki': 1, 'pandoc': 1, 'infolog': 1, 'mail': 1 }
 
 " Status bar
 function! InsertStatuslineColor(mode)
