@@ -173,7 +173,7 @@ let g:instant_markdown_autostart = 0
 syntax on
 set t_Co=256
 set background=light
-colorscheme Base2Tone_ForestDark
+colorscheme Base2Tone_EarthDark
 hi Normal ctermbg=none
 hi LineNr ctermfg=grey ctermbg=none
 hi CursorLine ctermbg=none
@@ -245,7 +245,7 @@ function! ActiveStatus()
 	let statusline.="%{mode()=='i'||mode()=='v'?'':''}"
 	let statusline.="%5*"
 	let statusline.="\ [%n/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]"
-	let statusline.="\ %.t\ %m\ "
+	let statusline.="\ %{pathshorten(expand('%:f'))}\ %m\ "
 	let statusline.="%{&readonly?'\ \ ':''}"
 	let statusline.="%="
 	let statusline.="\ %{''!=#&filetype?&filetype:'none'}\ "
