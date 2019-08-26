@@ -455,7 +455,7 @@ nmap < <C-B>																"Page up
 nmap > <C-F>																"Page down
 nnoremap - :call smooth_scroll#up(&scroll*2, 10, 4)<CR>						"Page up
 nnoremap <space> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>		"Page down
-nmap =j :%!python -c "import json, sys; print json.dumps(json.load(sys.stdin), indent=2)"<CR>
+nmap =j :%!python -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2))"<CR>
 nmap \f :!ranger<CR>
 map <leader>md :InstantMarkdownPreview<CR>
 cmap W w

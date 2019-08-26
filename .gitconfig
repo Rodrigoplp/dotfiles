@@ -1,0 +1,16 @@
+[core]
+	editor = /usr/local/bin/vim
+	excludesfile = /Users/rodrigopinto/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Tools/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = Rodrigo Pedroso
+	email = rodrigo_plp@yahoo.com
+[pager]
+	branch = false
+	stash = false
+	log = false
