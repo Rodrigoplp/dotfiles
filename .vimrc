@@ -160,10 +160,10 @@ endif
 function! Timesheet()
 	call append(line('.'), "")
 	call append(line('.'), "- 22:00 - 00:00 [2:00]")
-	call append(line('.'), "- 13:00 - 17:30 [4:30]")
-	call append(line('.'), "- 09:00 - 12:30 [3:30]")
+	call append(line('.'), "- 14:00 - 18:00 [4:00]")
+	call append(line('.'), "- 10:00 - 13:00 [3:00]")
 	call append(line('.'), "")
-	call append(line('.'), "#### " . strftime("%Y-%m-%d %a"))
+	call append(line('.'), strftime("%Y-%m-%d %a"))
 endfunction
 nmap <F12> :call Timesheet()<CR>
 
@@ -175,6 +175,11 @@ set t_Co=256
 set background=light
 colorscheme Base2Tone_EarthDark
 hi Normal ctermbg=none
+hi String ctermfg=white
+hi Function ctermfg=214
+hi StorageClass ctermfg=214
+hi Boolean ctermfg=214
+hi Conditional ctermfg=214
 hi LineNr ctermfg=grey ctermbg=none
 hi CursorLine ctermbg=none
 hi CursorLineNr ctermbg=none ctermfg=darkblue
