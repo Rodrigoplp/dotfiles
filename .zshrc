@@ -12,7 +12,7 @@ export EDITOR=/usr/local/bin/vim
 export VISUAL=/usr/local/bin/vim
 export PAGER='less -MR'
 export LESS='MR'
-export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/mongodb@3.6/bin:$PATH
+export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/mongodb-community@3.6/bin:$PATH
 export RIPGREP_CONFIG_PATH=$HOME/.rgrc
 
 # Aliases
@@ -24,13 +24,14 @@ alias scripts='cd ~/Documents/Development/Scripts'
 alias folder='find . -type f -exec ls -l {} \; | awk '\''{sum += $5} END {print sum}'\'''				# folder size
 alias dev="cd ~/Documents/Development"
 alias office='cd ~/Documents/Office'
-alias home='cd ~/Documents/Development/Rodrigoplp'
-alias tempo='cd ~/Documents/Office/Interview/Tempo/tempo-app'
-alias wiki='cd ~/Documents/Development/iPhone\ projects/Tnk_Wiki'
-alias site="cd ~/Documents/Development/iPhone\ projects/KidsOnTube_site"
+alias home='cd ~/Documents/Development/Rodrigoplp/Site'
+alias wiki='cd ~/Documents/Development/Tnk/Wiki'
+alias site="cd ~/Documents/Development/Tnk/Site"
 alias joinpdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py --output all.pdf *.pdf"	# join PDFs into one file
 alias hour='say it is now `date "+%H:%M"`'
 alias up1='cd ..;lsdir'																																					# up one dir
+alias up2='cd ..;cd ..;lsdir'
+alias up3='cd ..;cd ..;cd ..;lsdir'
 alias gitwho='git ls-tree -r master --name-only'																								# List files tracked by Git
 alias mem='top -l 1 | grep -E "^CPU|^Phys"'																											# system memory usage
 alias ranger='ranger --choosedir=$HOME/rangerdir; LASTDIR=`cat $HOME/rangerdir`; cd "$LASTDIR"'	# Quit Ranger to selected folder
@@ -39,7 +40,7 @@ alias mutt='neomutt'
 alias clock='tty-clock -scC 3'
 alias tree='tree -C -I node_modules --dirsfirst'
 alias ts='vim -c "set spell" "+normal zajjzajjzOj" ~/iCloud/Documents/timesheet.md'
-alias hustle='vim -c "set spell" ~/iCloud/Documents/hustle.md'
+alias mong='mongod --auth --dbpath=/Users/rodrigopinto/data/db'
 
 # Override bin
 alias vim=/usr/local/bin/vim
@@ -48,7 +49,7 @@ alias vimdiff=/usr/local/bin/vimdiff
 alias git=/usr/local/bin/git
 
 function up {
-    cd `expr "$PWD" : "^\(.*$1[^/]*\)"`
+  cd `expr "$PWD" : "^\(.*$1[^/]*\)"`
 }
 
 # Fuzzy find

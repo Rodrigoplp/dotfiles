@@ -16,7 +16,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'elzr/vim-json'
 Plugin 'pangloss/vim-javascript'
-Plugin 'chemzqm/vim-jsx-improve'
+Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'kballard/vim-swift'
 Plugin 'posva/vim-vue'
 Plugin 'atelierbram/Base2Tone-vim'
@@ -322,18 +322,6 @@ hi FoldColumn ctermbg=none
 let g:markdown_folding = 1
 let g:markdown_enable_folding = 1
 
-" Folding markdown
-function MarkdownFold() 
-	let h = matchstr(getline(v:lnum), '^#\+') 
-	if empty(h) 
-		return "=" 
-	else 
-		return ">" . len(h) 
-	endif 
-endfunction
-au BufEnter *.md setlocal foldexpr=MarkdownFold()
-au BufEnter *.md setlocal foldmethod=expr
-
 " Folding js and jsx
 function JsFold() 
 	let h = matchstr(getline(v:lnum), '// MARK:') 
@@ -499,6 +487,7 @@ inoremap ] <c-r>=ClosePair(']')<CR>
 inoremap } <c-r>=ClosePair('}')<CR>
 inoremap " <c-r>=QuoteDelim('"')<CR>
 inoremap ' <c-r>=QuoteDelim("'")<CR>
+inoremap ` <c-r>=QuoteDelim("`")<CR>
 nnoremap <C-]> :ALEFix<CR>
 
 function ClosePair(char)
