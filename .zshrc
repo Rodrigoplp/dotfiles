@@ -3,6 +3,7 @@ export ZSH="/Users/rodrigopinto/.oh-my-zsh"
 ZSH_THEME="rpinto"
 zle_highlight+=(paste:none)
 COMPLETION_WAITING_DOTS="true"
+export NVM_LAZY_LOAD=true
 plugins=(
   git
   zsh-nvm
@@ -22,11 +23,11 @@ alias lsf='ls -lahp | grep -v /'																																# list only file
 alias changelog='github-changes -o reol -r edge_ios -a --title "Leadkit iOS CHANGELOG"'					# REOL build
 alias scripts='cd ~/Documents/Development/Scripts'
 alias folder='find . -type f -exec ls -l {} \; | awk '\''{sum += $5} END {print sum}'\'''				# folder size
-alias dev="cd ~/Documents/Development"
-alias office='cd ~/Documents/Office'
-alias home='cd ~/Documents/Development/Rodrigoplp/Site'
-alias wiki='cd ~/Documents/Development/Tnk/Wiki'
-alias site="cd ~/Documents/Development/Tnk/Site"
+alias dev="cd ~/Documents/Development;lsdir"
+alias office='cd ~/Documents/Office;lsdir'
+alias home='cd ~/Documents/Development/Rodrigoplp/Site;lsdir'
+alias wiki='cd ~/Documents/Development/Tnk/Wiki;lsdir'
+alias site="cd ~/Documents/Development/Tnk/Site;lsdir"
 alias joinpdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py --output all.pdf *.pdf"	# join PDFs into one file
 alias hour='say it is now `date "+%H:%M"`'
 alias up1='cd ..;lsdir'																																					# up one dir
