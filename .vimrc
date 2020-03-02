@@ -26,6 +26,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'w0rp/ale'
 Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 Plugin 'mhinz/vim-startify'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -161,7 +162,7 @@ function! Timesheet()
 	call append(line('.'), "")
 	call append(line('.'), "- 22:00 - 00:00 [2:00]")
 	call append(line('.'), "- 14:00 - 18:00 [4:00]")
-	call append(line('.'), "- 10:00 - 13:00 [3:00]")
+	"call append(line('.'), "- 10:00 - 13:00 [3:00]")
 	call append(line('.'), "")
 	call append(line('.'), strftime("%Y-%m-%d %a"))
 endfunction
@@ -192,6 +193,12 @@ hi ALEWarningSign ctermbg=none ctermfg=190
 hi ALEError ctermbg=none cterm=underline
 hi ALEWarning ctermbg=none cterm=underline
 hi SignColumn ctermbg=none
+hi GitGutterAdd ctermbg=none
+hi GitGutterAdd ctermfg=red
+hi GitGutterChange ctermbg=none
+hi GitGutterChange ctermfg=red
+hi GitGutterDelete ctermbg=none
+hi GitGutterDelete ctermfg=red
 
 " YouCompleteMe options
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -314,6 +321,9 @@ hi VertSplit ctermfg=black
 set splitbelow
 set splitright
 
+" Gitgutter plugin
+let g:gitgutter_override_sign_column_highlight = 0
+
 " Enable folding
 set foldmethod=manual
 set foldcolumn=1
@@ -323,21 +333,22 @@ let g:markdown_folding = 1
 let g:markdown_enable_folding = 1
 
 " Folding js and jsx
-function JsFold() 
-	let h = matchstr(getline(v:lnum), '// MARK:') 
-	let h2 = matchstr(getline(v:lnum), '// MARK: -') 
-	if empty(h) 
-		return "=" 
-	elseif empty(h2) 
-		return ">1"
-	else
-		return ">2"
-	endif
-endfunction
-au BufEnter *.js setlocal foldexpr=JsFold()
-au BufEnter *.js setlocal foldmethod=expr
-au BufEnter *.jsx setlocal foldexpr=JsFold()
-au BufEnter *.jsx setlocal foldmethod=expr
+au BufEnter *.js setlocal foldmethod=marker foldmarker={,}
+au BufEnter *.jsx setlocal foldmethod=marker foldmarker={,}
+
+" function JsFold() 
+" 	let h = matchstr(getline(v:lnum), '// MARK:') 
+" 	let h2 = matchstr(getline(v:lnum), '// MARK: -') 
+" 	if empty(h) 
+" 		return "=" 
+" 	elseif empty(h2) 
+" 		return ">1"
+" 	else
+" 		return ">2"
+" 	endif
+" endfunction
+" au BufEnter *.js setlocal foldmethod=expr foldexpr=JsFold()
+" au BufEnter *.jsx setlocal foldmethod=expr foldexpr=JsFold()
 
 " Folding test.js
 function TestsFold()
