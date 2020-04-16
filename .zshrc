@@ -42,6 +42,8 @@ alias clock='tty-clock -scC 3'
 alias tree='tree -C -I node_modules --dirsfirst'
 alias ts='vim -c "set spell" "+normal zajjzajjzOj" ~/iCloud/Documents/timesheet.md'
 alias mong='mongod --auth --dbpath=/Users/rodrigopinto/data/db'
+alias pai='cd ~/Documents/Development/MundoSecXXI/site;lsdir'
+alias ing='cd ~/Documents/Development/Clients/Ingtech/projects;lsdir'
 
 # Override bin
 alias vim=/usr/local/bin/vim
@@ -56,6 +58,7 @@ function up {
 # Fuzzy find
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --ignore-case --hidden --follow --glob "!{.git,node_modules}/*"'
+export FZF_COMPLETION_TRIGGER='..'
 
 # Pyenv
 if command -v pyenv 1>/dev/null 2>&1; then

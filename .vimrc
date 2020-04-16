@@ -21,12 +21,13 @@ Plugin 'kballard/vim-swift'
 Plugin 'posva/vim-vue'
 Plugin 'atelierbram/Base2Tone-vim'
 Plugin 'terryma/vim-smooth-scroll'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'junegunn/fzf.vim'
 Plugin 'w0rp/ale'
 Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 Plugin 'mhinz/vim-startify'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'mrk21/yaml-vim'
+Plugin 'nikvdp/ejs-syntax'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -161,8 +162,8 @@ endif
 function! Timesheet()
 	call append(line('.'), "")
 	call append(line('.'), "- 22:00 - 00:00 [2:00]")
-	call append(line('.'), "- 14:00 - 18:00 [4:00]")
-	"call append(line('.'), "- 10:00 - 13:00 [3:00]")
+	call append(line('.'), "- 13:00 - 17:00 [4:00]")
+	call append(line('.'), "- 08:30 - 12:30 [4:00]")
 	call append(line('.'), "")
 	call append(line('.'), strftime("%Y-%m-%d %a"))
 endfunction
@@ -199,6 +200,10 @@ hi GitGutterChange ctermbg=none
 hi GitGutterChange ctermfg=red
 hi GitGutterDelete ctermbg=none
 hi GitGutterDelete ctermfg=red
+hi DiffAdd ctermbg=239
+hi DiffChange ctermbg=239
+hi DiffDelete ctermbg=239
+hi DiffText ctermbg=239
 
 " YouCompleteMe options
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -445,6 +450,11 @@ autocmd BufNewFile,BufRead *.xml set shiftwidth=2
 hi htmlItalic ctermfg=grey ctermbg=none cterm=none
 hi markdownError ctermbg=none
 autocmd BufNewFile,BufRead *.md set noexpandtab
+
+" yaml
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
+" autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:> foldmethod=indent nofoldenable
 
 "------------------------------------------------------------
 " Mappings
