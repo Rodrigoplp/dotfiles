@@ -162,14 +162,14 @@ endif
 function! Timesheet()
 	call append(line('.'), "")
 	call append(line('.'), "- 22:00 - 00:00 [2:00]")
-	call append(line('.'), "- 13:00 - 17:00 [4:00]")
-	call append(line('.'), "- 08:30 - 12:30 [4:00]")
+  if strftime('%w') == 6 || strftime('%w') == 0
+    call append(line('.'), "- 15:00 - 18:00 [3:00]")
+  endif
 	call append(line('.'), "")
 	call append(line('.'), strftime("%Y-%m-%d %a"))
 endfunction
 nmap <F12> :call Timesheet()<CR>
 
-" Vim-instant-markdown (https://github.com/suan/vim-instant-markdown)
 let g:instant_markdown_autostart = 0
 
 syntax on
@@ -413,6 +413,7 @@ autocmd BufNewFile,BufRead *.html set softtabstop=2
 autocmd BufNewFile,BufRead *.html set shiftwidth=2
 autocmd BufNewFile,BufRead *.html hi error ctermbg=none ctermfg=gray
 autocmd BufNewFile,BufRead *.html set filetype=htmlm4
+autocmd BufNewFile,BufRead *.html set syntax=html
 
 autocmd BufNewFile,BufRead *.css set tabstop=2
 autocmd BufNewFile,BufRead *.css set softtabstop=2
@@ -450,10 +451,10 @@ autocmd BufNewFile,BufRead *.xml set shiftwidth=2
 hi htmlItalic ctermfg=grey ctermbg=none cterm=none
 hi markdownError ctermbg=none
 autocmd BufNewFile,BufRead *.md set noexpandtab
+autocmd FileType markdown setlocal spell
 
 " yaml
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
-" autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab foldmethod=indent
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml cursorcolumn
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:> foldmethod=indent nofoldenable
 
 "------------------------------------------------------------
