@@ -7,4 +7,6 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 PROMPT=' %{$fg[blue]%}%1~$(git_prompt_info) ${ret_status}%{$reset_color%}'
 
-# RPROMPT='%{$fg[cyan]%}%~%{$reset_color%}'
+RPROMPT='%{$fg[cyan]%}%~%{$reset_color%}'
+
+export LSCOLORS=exfxcxcxxxegedabagacex

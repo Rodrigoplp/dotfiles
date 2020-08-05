@@ -1,0 +1,111 @@
+# Install Linux
+
+- Swap ctrl and alt keys: install Tweaks.
+
+- Create a shortcut at Terminal to open its settings with <Ctrl-,>
+
+## Disable bold fonts
+
+```
+dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/allow-bold false
+```
+
+Replace the long string after `profiles:/:` with the id of the profile in the Terminal preferences.
+
+## Install Regolith
+
+### Make Teams notifications to float
+
+With Regolith, Microsoft Teams notifications will split the screen and occupy an entire panel. To reduce them to a floating square, it is necessary to add a modifier to the Xresources file.
+
+The notification identifier is:
+
+```
+[class="Microsoft Teams - Preview" id=48234502 instance="microsoft teams - preview" title="Microsoft Teams Notification" window_role="browser-window"]
+```
+
+Add the following to `.config/regolith/Xresources`:
+
+```
+for_window [title="Microsoft Teams Notification"] floating enable
+```
+
+### Extra settings for Xresources
+
+```
+i3-wm.gaps.inner.size: 0
+for_window [window_role="pop-up"] floating enable
+for_window [title="Microsoft Teams Notification"] floating enable
+```
+
+## Audio
+
+Improve audio control by installing PulseAudio Volume Control. It allows increasing volum high enough to use AirPods.
+
+## Vim
+
+- Install make
+
+	sudo apt-get install build-essential
+
+- Build vim
+
+Install dependencies.
+
+```
+sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
+libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+python3-dev ruby-dev lua5.1 liblua5.1-dev libperl-dev git liblua5.1-dev
+```
+
+Install Vim.
+
+```
+cd
+git clone https://github.com/vim/vim.git
+cd vim/src
+```
+
+Compile.
+
+```
+sudo distclean
+./configure --with-features=huge \
+--enable-multibyte \
+--enable-rubyinterp=yes \
+--enable-pythoninterp=yes \
+--with-python-config-dir=/usr/lib/python2.7/config \ # pay attention here check directory correct
+--enable-python3interp=yes \
+--with-python3-config-dir=/usr/lib/python3.8/config \
+--enable-perlinterp=yes \
+--enable-luainterp=yes \
+--enable-gui=gtk2 \
+--enable-cscope \
+--prefix=/usr/local
+sudo make
+sudo make install
+```
+
+Point zsh to load the new vim.
+
+```file:~/.zshrc
+alias vim=/usr/local/bin/vim
+alias vi=/usr/local/bin/vim
+alias vimdiff=/usr/local/bin/vimdiff
+```
+
+## Sharing files with Samba
+
+Set user: add the line bellow to `/etc/samba/smb.conf`
+
+```
+guest account = rodrigo
+```
+
+If there are files that were transfered and can be opened, run:
+
+```
+sudo chmod 644 file.txt
+sudo chown -R rodrigo:rodrigo file.txt
+```
