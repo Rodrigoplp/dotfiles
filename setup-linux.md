@@ -27,15 +27,15 @@ The notification identifier is:
 Add the following to `.config/regolith/Xresources`:
 
 ```
-for_window [title="Microsoft Teams Notification"] floating enable
+for_window [title="Microsoft Teams Notification"]: floating enable
 ```
 
 ### Extra settings for Xresources
 
 ```
 i3-wm.gaps.inner.size: 0
-for_window [window_role="pop-up"] floating enable
-for_window [title="Microsoft Teams Notification"] floating enable
+for_window [window_role="pop-up"]: floating enable
+for_window [title="Microsoft Teams Notification"]: floating enable
 ```
 
 ### Script to identify windows
@@ -93,6 +93,26 @@ chmod -x criteria.sh
 ```
 
 It will turn the mouse pointer into a "+" symbol. When the problematic window appears, clock on it. The terminal will output the identification that can be used in Xresources.
+
+## Git
+
+Install updated version.
+
+```
+sudo add-apt-repository ppa:git-core/ppa -y
+sudo apt-get update
+sudo apt-get install git
+git --version
+```
+
+Setup global variables
+
+```
+git config --global pager.branch false
+git config --global pager.stash false
+git config --global pager.log false
+git config --global mergetool.keepBackup false
+```
 
 ## Audio
 
