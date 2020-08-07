@@ -16,7 +16,9 @@ Replace the long string after `profiles:/:` with the id of the profile in the Te
 
 ### Make Teams notifications to float
 
-With Regolith, Microsoft Teams notifications will split the screen and occupy an entire panel. To reduce them to a floating square, it is necessary to add a modifier to the Xresources file.
+With Regolith, Microsoft Teams notifications will split the screen and occupy an entire panel. To reduce them to a floating square, the manual says to add a modifier to the Xresources file `.config/regolith/Xresources`.
+
+But that was to no avail. Instead, the only way to make it work was to modify the protected config file `/etc/regolith/i3/config`.
 
 The notification identifier is:
 
@@ -24,18 +26,20 @@ The notification identifier is:
 [class="Microsoft Teams - Preview" id=48234502 instance="microsoft teams - preview" title="Microsoft Teams Notification" window_role="browser-window"]
 ```
 
-Add the following to `.config/regolith/Xresources`:
+Add the following to `/etc/regolith/i3/config`:
 
 ```
 for_window [title="Microsoft Teams Notification"]: floating enable
+for_window [title="Shrew Soft VPN Connect"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="About"] floating enable
+for_window [instance="Browser"] floating enable
 ```
 
-### Extra settings for Xresources
+The only config that worked in Xresources was:
 
 ```
 i3-wm.gaps.inner.size: 0
-for_window [window_role="pop-up"]: floating enable
-for_window [title="Microsoft Teams Notification"]: floating enable
 ```
 
 ### Script to identify windows
@@ -112,6 +116,7 @@ git config --global pager.branch false
 git config --global pager.stash false
 git config --global pager.log false
 git config --global mergetool.keepBackup false
+git config --global pull.rebase true
 ```
 
 ## Audio
