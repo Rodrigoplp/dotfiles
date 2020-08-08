@@ -46,7 +46,8 @@ set omnifunc=syntaxcomplete#Complete
 set hidden
 
 " Fuzzy finder
-set rtp+=/usr/local/opt/fzf
+"set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
 
 command! -bang -nargs=* Find
   \ call fzf#vim#grep(
@@ -161,10 +162,12 @@ endif
 " Insert skeleton of timesheet text
 function! Timesheet()
 	call append(line('.'), "")
-	call append(line('.'), "- 22:00 - 00:00 [2:00]")
-  if strftime('%w') == 6 || strftime('%w') == 0
-    call append(line('.'), "- 15:00 - 18:00 [3:00]")
-  endif
+  "call append(line('.'), "- 22:00 - 00:00 [2:00]")
+  "if strftime('%w') == 6 || strftime('%w') == 0
+  " call append(line('.'), "- 15:00 - 18:00 [3:00]")
+  "endif
+	call append(line('.'), "- 13:30 - 17:00 [3:30]")
+	call append(line('.'), "- 09:00 - 13:00 [4:00]")
 	call append(line('.'), "")
 	call append(line('.'), strftime("%Y-%m-%d %a"))
 endfunction
@@ -242,7 +245,7 @@ function! ModeName(mode)
 		hi User2 ctermbg=none ctermfg=33
 		hi User3 ctermbg=none ctermfg=33
 		hi User4 ctermbg=none ctermfg=33
-		hi User5 ctermbg=none ctermfg=232
+		hi User5 ctermbg=none ctermfg=white " 232
 		redrawstatus
 		return 'N'
 	endif
@@ -304,13 +307,21 @@ hi SpellBad cterm=underline ctermbg=none ctermfg=LightRed
 hi SpellLocal cterm=underline ctermbg=none ctermfg=LightRed
 set spelllang=en_us		" spelllang=en_us,fr
 
-" Change cursor per mode
-let &t_EI = "\<Esc>]50;CursorShape=2\x7"	" Normal mode: underline
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"	" Insert mode: vertical line
-let &t_SR = "\<Esc>]50;CursorShape=0\x7"	" Replace mode: block
+" Change cursor per mode (Linux)
+let &t_SI = "\<Esc>[5 q"
+let &t_SR = "\<Esc>[2 q"
+let &t_EI = "\<Esc>[3 q"
 
-" Yank to clipboard
-set clipboard=unnamed
+" Change cursor per mode (Mac)
+"let &t_EI = '\<Esc>]50;CursorShape=2\x7'	" Normal mode: underline
+"let &t_SI = '\<Esc>]50;CursorShape=1\x7'	" Insert mode: vertical line
+"let &t_SR = '\<Esc>]50;CursorShape=0\x7'	" Replace mode: block
+
+" Yank to clipboard on Mac
+" set clipboard=unnamed
+
+" Yank to clipboard on Linux
+set clipboard=unnamedplus
 
 " NerdTree like setup
 let g:netrw_banner = 0
@@ -419,6 +430,12 @@ autocmd BufNewFile,BufRead *.css set tabstop=2
 autocmd BufNewFile,BufRead *.css set softtabstop=2
 autocmd BufNewFile,BufRead *.css set shiftwidth=2
 
+" Markdown
+hi htmlItalic ctermfg=grey ctermbg=none cterm=none
+hi markdownError ctermbg=none
+autocmd BufNewFile,BufRead *.md set noexpandtab
+autocmd BufNewFile,BufRead *.json set spell
+
 " JSON
 com! Json %!python -m json.tool
 let g:vim_json_syntax_conceal = 0
@@ -428,7 +445,7 @@ autocmd BufNewFile,BufRead *.json set shiftwidth=2
 autocmd BufNewFile,BufRead *.json set nospell
 autocmd BufNewFile,BufRead *.json hi constant ctermfg=gray
 autocmd BufNewFile,BufRead *.json hi error ctermbg=none
-autocmd BufNewFile,BufRead *.json hi Label ctermfg=black
+"autocmd BufNewFile,BufRead *.json hi Label ctermfg=black
 autocmd BufNewFile,BufRead *.json hi jsonString ctermfg=blue
 autocmd BufNewFile,BufRead *.json hi jsonNumber ctermfg=magenta
 autocmd BufNewFile,BufRead *.json hi jsonBoolean ctermfg=blue
@@ -446,12 +463,6 @@ endfunction
 autocmd BufNewFile,BufRead *.xml set tabstop=2
 autocmd BufNewFile,BufRead *.xml set softtabstop=2
 autocmd BufNewFile,BufRead *.xml set shiftwidth=2
-
-" Markdown
-hi htmlItalic ctermfg=grey ctermbg=none cterm=none
-hi markdownError ctermbg=none
-autocmd BufNewFile,BufRead *.md set noexpandtab
-autocmd FileType markdown setlocal spell
 
 " yaml
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml cursorcolumn

@@ -29,7 +29,7 @@ The notification identifier is:
 Add the following to `/etc/regolith/i3/config`:
 
 ```
-for_window [title="Microsoft Teams Notification"]: floating enable
+for_window [title="Microsoft Teams Notification"]: floating enable move position 1550 10
 for_window [title="Shrew Soft VPN Connect"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="About"] floating enable
