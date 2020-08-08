@@ -28,6 +28,7 @@ Plugin 'mhinz/vim-startify'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mrk21/yaml-vim'
 Plugin 'nikvdp/ejs-syntax'
+Plugin 'evanleck/vim-svelte', {'branch': 'main'}
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -313,9 +314,9 @@ let &t_SR = "\<Esc>[2 q"
 let &t_EI = "\<Esc>[3 q"
 
 " Change cursor per mode (Mac)
-"let &t_EI = '\<Esc>]50;CursorShape=2\x7'	" Normal mode: underline
-"let &t_SI = '\<Esc>]50;CursorShape=1\x7'	" Insert mode: vertical line
-"let &t_SR = '\<Esc>]50;CursorShape=0\x7'	" Replace mode: block
+"let &t_EI = "\<Esc>]50;CursorShape=2\x7"	" Normal mode: underline
+"let &t_SI = "\<Esc>]50;CursorShape=1\x7"	" Insert mode: vertical line
+"let &t_SR = "\<Esc>]50;CursorShape=0\x7"	" Replace mode: block
 
 " Yank to clipboard on Mac
 " set clipboard=unnamed
