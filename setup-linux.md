@@ -34,6 +34,7 @@ for_window [title="Shrew Soft VPN Connect"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="About"] floating enable
 for_window [instance="Browser"] floating enable
+for_window [class="Gpick"] floating enable
 ```
 
 The only config that worked in Xresources was:
@@ -180,9 +181,7 @@ alias vimdiff=/usr/local/bin/vimdiff
 
 Set user: add the line bellow to `/etc/samba/smb.conf`
 
-```
-guest account = rodrigo
-```
+	guest account = rodrigo
 
 If there are files that were transfered and can be opened, run:
 
@@ -190,6 +189,79 @@ If there are files that were transfered and can be opened, run:
 sudo chmod 644 file.txt
 sudo chown -R rodrigo:rodrigo file.txt
 ```
+
+## Better touchpad
+
+### Install Synaptics driver
+
+	sudo apt install xserver-xorg-input-synaptics-hwe-18.04
+
+Get your mouse device id by running the following in a terminal:
+
+	xinput list
+
+Take that number you got (just the number after "id=") and replace "{device id}" with that number in the following command:
+
+	xinput list-props {device id} | grep "Scrolling Distance"
+
+It is case sensitive unless you use -i in the grep command. Write down the numbers you find in the output from that command (in my case it was the number 1, shown three times and separated by commas). You will use the negative values of the numbers you get in your output. Also, make sure to write down the property number (it will be in parentheses in the output; in my case it was (272) in Ubuntu and (273) in Fedora).
+
+Note: If you get no output containing the property "Scrolling Distance" this method will not work for you and you will need to stop here and skip to the alternate way shown below this guide.
+
+Run the following command in your open terminal:
+
+    sudo touch /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf
+
+Now, run the following command (you can use your favorite text editor instead of nano but I use nano):
+
+	sudo vim /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf
+
+In the file you have opened in your preferred text editor, paste the following (but be sure to change the numbers to the same comma-separated numbers you got from step 3; in my case the number was 1 so I put -1):
+
+	Section "InputClass"
+			Identifier "Natural Scrolling"
+			MatchIsPointer "on"
+			MatchDevicePath "/dev/input/event*"
+			Option "VertScrollDelta" "-1"
+			Option "HorizScrollDelta" "-1"
+			Option "DialDelta" "-1"
+	EndSection
+
+Save the file and exit the text editor. No need for a reboot. Just issue the following command (substituting the property number and the negatives of the numbers you got in the third step, and the device id you got from the second step):
+
+	xinput set-prop {device id} {property number} -1 -1 -1
+
+### Settings
+
+Test different settings with
+
+	synclient AccelFactor=0.5
+
+When satisfied, add new settings to config file:
+
+	sudo vim /usr/share/X11/xorg.conf.d/70-synaptics.conf
+
+A few settings:
+
+```
+Option "HorizTwoFingerScroll" "1"
+Option "TapButton2" "0"
+Option "VertScrollDelta" "-50"
+Option "HorizScrollDelta" "-50"
+Option "MinSpeed" "3"
+Option "MaxSpeed" "4"
+Option "AccelFactor" "0.35"
+```
+
+### Disable touchpad while typing
+
+Open "Startup applications" and add a new program with the following setup:
+
+- Name: Sydaemon
+- Command: syndaemon -i .5 -K -t -R -d
+- Comment: Disable touchpad while typing
+
+Reboot.
 
 ## Recover packages uninstalled by mistake
 
