@@ -346,7 +346,7 @@ hi FoldColumn ctermbg=none
 let g:markdown_folding = 1
 let g:markdown_enable_folding = 1
 
-" Folding js and jsx
+" Folding js, jsx and svelte
 au BufEnter *.js setlocal foldmethod=marker foldmarker={,}
 au BufEnter *.jsx setlocal foldmethod=marker foldmarker={,}
 au BufEnter *.svelte setlocal foldmethod=marker foldmarker={,}
@@ -413,7 +413,7 @@ autocmd BufNewFile,BufRead *.py set textwidth=139
 autocmd BufNewFile,BufRead *.py set autoindent
 autocmd BufNewFile,BufRead *.py set fileformat=unix
 
-" Javascript, HTML and CSS
+" Javascript
 autocmd BufNewFile,BufRead *.js set tabstop=2
 autocmd BufNewFile,BufRead *.js set softtabstop=2
 autocmd BufNewFile,BufRead *.js set shiftwidth=2
