@@ -22,12 +22,14 @@ Plugin 'posva/vim-vue'
 Plugin 'atelierbram/Base2Tone-vim'
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'junegunn/fzf.vim'
-Plugin 'w0rp/ale'
 Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 Plugin 'mhinz/vim-startify'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mrk21/yaml-vim'
 Plugin 'nikvdp/ejs-syntax'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'dense-analysis/ale'
+Plugin 'prettier/vim-prettier'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -46,8 +48,8 @@ set omnifunc=syntaxcomplete#Complete
 set hidden
 
 " Fuzzy finder
-"set rtp+=/usr/local/opt/fzf
-set rtp+=~/.fzf
+set rtp+=/usr/local/opt/fzf
+"set rtp+=~/.fzf
 
 command! -bang -nargs=* Find
   \ call fzf#vim#grep(
@@ -73,25 +75,25 @@ set showcmd
 
 " Make Shift + arrow behave as selector instead of page jumper
 "if exists('$TMUX')
-	nmap <S-Up> v<Up>
-	nmap <S-Down> v<Down>
-	nmap <S-Left> v<Left>
-	nmap <S-Right> v<Right>
-	vmap <S-Up> <Up>
-	vmap <S-Down> <Down>
-	vmap <S-Left> <Left>
-	vmap <S-Right> <Right>
-	imap <S-Up> <Esc>v<Up>
-	imap <S-Down> <Esc>v<Down>
-	imap <S-Left> <Esc>v<Left>
-	imap <S-Right> <Esc>v<Right>
+	nnoremap <S-Up> v<Up>
+	nnoremap <S-Down> v<Down>
+	nnoremap <S-Left> v<Left>
+	nnoremap <S-Right> v<Right>
+	vnoremap <S-Up> <Up>
+	vnoremap <S-Down> <Down>
+	vnoremap <S-Left> <Left>
+	vnoremap <S-Right> <Right>
+	inoremap <S-Up> <Esc>v<Up>
+	inoremap <S-Down> <Esc>v<Down>
+	inoremap <S-Left> <Esc>v<Left>
+	inoremap <S-Right> <Esc>v<Right>
 "else
 "	set keymodel=startsel,stopsel
 "endif
 
 " Also mapping ctrl-c, ctrl-v, ctrl-x and ctrl-z
-vmap <C-c> y<Esc>
-vmap <C-x> d<Esc>
+vnoremap <C-c> y<Esc>
+vnoremap <C-x> d<Esc>
 inoremap <C-z> <C-G>u<Esc>[s1z=`]a<C-G>u
 nnoremap <C-z> <nop>			" Disable the standard behaviour of minimizing vim
 
@@ -104,7 +106,7 @@ function RangerExplorer()
 	endif
 	redraw!
 endfun
-map <Leader>x :call RangerExplorer()<CR>
+noremap <Leader>x :call RangerExplorer()<CR>
 
 " Do not show intro message when opening Vim. Add 'I' to default.
 set shortmess+=I
@@ -162,16 +164,14 @@ endif
 " Insert skeleton of timesheet text
 function! Timesheet()
 	call append(line('.'), "")
-  "call append(line('.'), "- 22:00 - 00:00 [2:00]")
-  "if strftime('%w') == 6 || strftime('%w') == 0
-  " call append(line('.'), "- 15:00 - 18:00 [3:00]")
-  "endif
-	call append(line('.'), "- 13:30 - 17:00 [3:30]")
-	call append(line('.'), "- 09:00 - 13:00 [4:00]")
+	call append(line('.'), "- 22:00 - 00:00 [2:00]")
+  if strftime('%w') == 6 || strftime('%w') == 0
+    call append(line('.'), "- 15:00 - 18:00 [3:00]")
+  endif
 	call append(line('.'), "")
 	call append(line('.'), strftime("%Y-%m-%d %a"))
 endfunction
-nmap <F12> :call Timesheet()<CR>
+nnoremap <F12> :call Timesheet()<CR>
 
 let g:instant_markdown_autostart = 0
 
@@ -207,10 +207,8 @@ hi DiffAdd ctermbg=239
 hi DiffChange ctermbg=239
 hi DiffDelete ctermbg=239
 hi DiffText ctermbg=239
-
-" YouCompleteMe options
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_filetype_blacklist = { 'notes': 1, 'markdown': 1, 'md': 1, 'text': 1, 'vimwiki': 1, 'pandoc': 1, 'infolog': 1, 'mail': 1 }
+hi EasyMotionTarget2First ctermfg=226
+hi EasyMotionTarget2Second ctermfg=226
 
 " Status bar
 function! InsertStatuslineColor(mode)
@@ -245,7 +243,7 @@ function! ModeName(mode)
 		hi User2 ctermbg=none ctermfg=33
 		hi User3 ctermbg=none ctermfg=33
 		hi User4 ctermbg=none ctermfg=33
-		hi User5 ctermbg=none ctermfg=white " 232
+		hi User5 ctermbg=none ctermfg=232
 		redrawstatus
 		return 'N'
 	endif
@@ -308,20 +306,20 @@ hi SpellLocal cterm=underline ctermbg=none ctermfg=LightRed
 set spelllang=en_us		" spelllang=en_us,fr
 
 " Change cursor per mode (Linux)
-let &t_SI = "\<Esc>[5 q"
-let &t_SR = "\<Esc>[2 q"
-let &t_EI = "\<Esc>[3 q"
+"let &t_SI = "\<Esc>[5 q"
+"let &t_SR = "\<Esc>[2 q"
+"let &t_EI = "\<Esc>[3 q"
 
 " Change cursor per mode (Mac)
-"let &t_EI = "\<Esc>]50;CursorShape=2\x7"	" Normal mode: underline
-"let &t_SI = "\<Esc>]50;CursorShape=1\x7"	" Insert mode: vertical line
-"let &t_SR = "\<Esc>]50;CursorShape=0\x7"	" Replace mode: block
+let &t_EI = "\<Esc>]50;CursorShape=2\x7"	" Normal mode: underline
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"	" Insert mode: vertical line
+let &t_SR = "\<Esc>]50;CursorShape=0\x7"	" Replace mode: block
 
 " Yank to clipboard on Mac
-" set clipboard=unnamed
+set clipboard=unnamed
 
 " Yank to clipboard on Linux
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 
 " NerdTree like setup
 let g:netrw_banner = 0
@@ -348,7 +346,7 @@ hi FoldColumn ctermbg=none
 let g:markdown_folding = 1
 let g:markdown_enable_folding = 1
 
-" Folding js, jsx and svelte
+" Folding js and jsx
 au BufEnter *.js setlocal foldmethod=marker foldmarker={,}
 au BufEnter *.jsx setlocal foldmethod=marker foldmarker={,}
 au BufEnter *.svelte setlocal foldmethod=marker foldmarker={,}
@@ -415,7 +413,7 @@ autocmd BufNewFile,BufRead *.py set textwidth=139
 autocmd BufNewFile,BufRead *.py set autoindent
 autocmd BufNewFile,BufRead *.py set fileformat=unix
 
-" Javascript
+" Javascript, HTML and CSS
 autocmd BufNewFile,BufRead *.js set tabstop=2
 autocmd BufNewFile,BufRead *.js set softtabstop=2
 autocmd BufNewFile,BufRead *.js set shiftwidth=2
@@ -443,7 +441,7 @@ autocmd BufNewFile,BufRead *.css set shiftwidth=2
 hi htmlItalic ctermfg=grey ctermbg=none cterm=none
 hi markdownError ctermbg=none
 autocmd BufNewFile,BufRead *.md set noexpandtab
-autocmd BufNewFile,BufRead *.json set spell
+autocmd BufNewFile,BufRead *.md set spell
 
 " JSON
 com! Json %!python -m json.tool
@@ -454,7 +452,7 @@ autocmd BufNewFile,BufRead *.json set shiftwidth=2
 autocmd BufNewFile,BufRead *.json set nospell
 autocmd BufNewFile,BufRead *.json hi constant ctermfg=gray
 autocmd BufNewFile,BufRead *.json hi error ctermbg=none
-"autocmd BufNewFile,BufRead *.json hi Label ctermfg=black
+autocmd BufNewFile,BufRead *.json hi Label ctermfg=black
 autocmd BufNewFile,BufRead *.json hi jsonString ctermfg=blue
 autocmd BufNewFile,BufRead *.json hi jsonNumber ctermfg=magenta
 autocmd BufNewFile,BufRead *.json hi jsonBoolean ctermfg=blue
@@ -482,26 +480,26 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentke
 "
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
-nmap Y y$
-
+nnoremap Y y$
+inoremap cll console.log()<esc>ha
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
-nmap < <C-B>																"Page up
-nmap > <C-F>																"Page down
+nnoremap < <C-B>																"Page up
+nnoremap > <C-F>																"Page down
 nnoremap - :call smooth_scroll#up(&scroll*2, 10, 4)<CR>						"Page up
 nnoremap <space> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>		"Page down
-nmap =j :%!python -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2))"<CR>
-nmap \f :!ranger<CR>
-map <leader>md :InstantMarkdownPreview<CR>
-cmap W w
-cmap Q q
-map 0 :call LineHome()<CR>
+nnoremap =j :%!python -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2))"<CR>
+nnoremap \f :!ranger<CR>
+noremap <leader>md :InstantMarkdownPreview<CR>
+cnoremap W w
+cnoremap Q q
+noremap 0 :call LineHome()<CR>
 inoremap ><Tab> ><Esc>F<lyt>o</<C-r>"><Esc>O<Space>
-nmap J <nop>						" Avoid joining lines when hitting caps lock by mistake
-nmap K <nop>						" Avoid opening help when hitting caps lock by mistake
+nnoremap J <nop>						" Avoid joining lines when hitting caps lock by mistake
+nnoremap K <nop>						" Avoid opening help when hitting caps lock by mistake
 
 " Identify rule causing highlight
-map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+noremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
 " First character of line or beginning of line
 function! LineHome()
@@ -510,7 +508,7 @@ function! LineHome()
 	if x == col('.')
 		unmap 0
 		execute "normal 0"
-		map 0 :call LineHome()<CR>:echo<CR>
+		noremap 0 :call LineHome()<CR>:echo<CR>
 	endif
 	return ""
 endfunction
@@ -595,3 +593,6 @@ nnoremap <Leader>bn :bn<CR>								" Next buffer
 " Position search matches in middle of screen
 nnoremap n nzz
 nnoremap N Nzz
+
+" Easy motion plugin
+noremap <C-s> <Plug>(easymotion-s)
