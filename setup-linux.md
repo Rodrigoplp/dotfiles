@@ -245,12 +245,15 @@ A few settings:
 
 ```
 Option "HorizTwoFingerScroll" "1"
-Option "TapButton2" "0"
+Option "TapButton2" "3"
 Option "VertScrollDelta" "-50"
 Option "HorizScrollDelta" "-50"
-Option "MinSpeed" "3"
+Option "MinSpeed" "1"
 Option "MaxSpeed" "4"
-Option "AccelFactor" "0.35"
+Option "AccelFactor" "0.1"
+Option "PalmDetect" "1"
+Option "HorizHysteresis" "0"
+Option "VertHysteresis" "0"
 ```
 
 ### Disable touchpad while typing
@@ -271,3 +274,7 @@ echo sudo apt-get install `grep Remove /var/log/apt/history.log | tail -1 | sed 
 chmod +x restore
 ./restore
 ```
+
+## If VPN fails to connect
+
+	sudo /usr/sbin/iked
