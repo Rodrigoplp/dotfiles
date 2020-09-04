@@ -179,11 +179,30 @@ alias vimdiff=/usr/local/bin/vimdiff
 
 ## Sharing files with Samba
 
+### SSH
+
+```
+sudo service ssh status
+sudo service start ssh
+hostname -I
+```
+
+From remote computer
+
+```
+sftp rodrigo@10.0.1.18
+pwd
+lpwd
+get -r .ssh
+```
+
+### Samba
+
 Set user: add the line bellow to `/etc/samba/smb.conf`
 
 	guest account = rodrigo
 
-If there are files that were transfered and can be opened, run:
+If there are files that were transferred and can be opened, run:
 
 ```
 sudo chmod 644 file.txt
